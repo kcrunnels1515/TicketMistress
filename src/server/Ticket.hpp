@@ -9,12 +9,40 @@ enum State {
   VT, VA, WA, WV, WI, WY
 };
 
+enum Model {
+  FORD,
+  TOYOTA,
+  CHEVY,
+  HONDA,
+  HYUND,
+  JEEP,
+  NISSAN,
+  KIA,
+  SUBARU,
+  RAM,
+  TESLA,
+  GMC,
+  BENZ,
+  BMW,
+  MAZDA,
+  OTHER
+};
 
+enum Color {
+  RED,
+  ORANGE,
+  YELLOW,
+  GREEN,
+  BLUE,
+  PURPLE,
+
+};
 
 class Ticket {
   private:
   State _state;
-
+  Model _model;
+  Color _color;
 };
 
 #endif // TICKET_H_
