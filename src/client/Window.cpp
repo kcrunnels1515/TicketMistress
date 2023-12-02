@@ -71,11 +71,13 @@ std::vector<string> Window::start(){
         {
             if (event.type == sf::Event::Closed) {
                 window.close();
-                return "";
+                vector<string> emptyVec;
+                return emptyVec;
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
                 window.close();
-                return "";
+                vector<string> emptyVec;
+                return emptyVec;
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
 //                if (name.size() != 0){
@@ -113,10 +115,14 @@ std::vector<string> Window::start(){
         window.draw(bkgd);
         printText("Welcome To Ticket Mistress!", true, width*16, 16 * height + 50 -150, &window, 24, true, true);
 
-        printText("Your State: " + name +"|", false, width*16, 16 * height + 50 -75, &window, 20, true, true);
-        printText("Your Car Make: "name + "|", false, width*16, 16 * height + 50 , &window, 18, false, true);
+        printText("Your State: " + name +"|", false, width*16, 16 * height + 50 -75, &window, 18, true, true);
+        printText("Your Car Make: "+make + "|", false, width*16, 16 * height + 50 , &window, 18, false, true);
+        printText("Your Car Model: "+model + "|", false, width*16, 16 * height + 50 +75 , &window, 18, false, true);
         window.display();
     }
-    cout << name << endl;
-    return name;
+    vector<string> infoVect;
+    infoVect.push_back(name);
+    infoVect.push_back(make);
+    infoVect.push_back(model);
+    return infoVect;
 };
