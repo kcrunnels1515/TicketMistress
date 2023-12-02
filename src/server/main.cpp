@@ -29,3 +29,7 @@ int main(int argc,char* argv[]) {
   }
   return 0;
 }
+
+Ticket parse_to_ticket(std::string reg_state, std::string v_body_type, std::string v_make, std::string voi_time, std::string color, std::string year) {
+
+}
