@@ -10,21 +10,23 @@ enum State {
 };
 
 enum Model {
-  FORD,
-  TOYOTA,
+  BENZ,
+  BMW,
+  BUICK,
   CHEVY,
+  FORD,
+  GMC,
   HONDA,
   HYUND,
   JEEP,
-  NISSAN,
   KIA,
-  SUBARU,
-  RAM,
-  TESLA,
-  GMC,
-  BENZ,
-  BMW,
   MAZDA,
+  NISSAN,
+  RAM,
+  SUBARU,
+  TESLA,
+  TOYOTA,
+  VOLKS,
   OTHER
 };
 
@@ -50,16 +52,13 @@ enum Time {
   MIDNIGHT,
 };
 
-class Ticket {
-  private:
+struct Ticket {
   State _state; // map to set of elements with same state ps, don't use unordered set,
                 // you can't do set intersection
   Model _model;
   Color _color;
   Make _make;
   Time _time;
-
-  public:
   Ticket(State state, Model model, Color color, Make make, Time time)
     : _state(state), _model(model), _color(color), _make(make), _time(time) {}
   ~Ticket() {}
