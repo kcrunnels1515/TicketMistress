@@ -29,7 +29,7 @@ class BongoTree {
     // first 5 chars mark state, model, color, make, time
     // complement of
 
-    std::set<Ticket*> selected_data;
+    std::set<Ticket*>& selected_data = {};
     std::set_intersection(_states[state].begin(), _states[state].end(),
                           _models[model].begin(), _models[model].end(),
                           std::inserter(selected_data, selected_data.begin()));
