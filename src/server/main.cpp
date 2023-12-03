@@ -38,10 +38,10 @@ int main(int argc,char* argv[]) {
 
   BongoTree ds_1;
 
-  io::CSVReader<6> in(argv[2]);
-  in.read_header(io::ignore_extra_column, "reg_state","v_body_type","v_make","voilation_time","color","year");
-  std::string reg_state, v_body_type, v_make, voi_time, color, year;
-  while(in.read_row(reg_state, v_body_type, v_make, voi_time, color, year)){
+  io::CSVReader<5> in(argv[2]);
+  in.read_header(io::ignore_extra_column, "reg_state","v_body_type","v_make","color","year");
+  std::string reg_state, v_body_type, v_make, color, year;
+  while(in.read_row(reg_state, v_body_type, v_make, color, year)){
     Ticket* temp = new Ticket;
     if (auto search = state_map.find(reg_state); search != state_map.end()) {
       temp->_state = search->second;
@@ -63,14 +63,15 @@ int main(int argc,char* argv[]) {
     } else {
       temp->_model = DIM3;
     }
-    temp->_time = interpret_time(voi_time);
     temp->_year = interpret_year(year);
     ds_1.insert(temp);
-    std::cout << "State: " << reg_state << "; Body: " << v_body_type << "; Make: "
-      << v_make << "; Time of Obsv: " << voi_time << "; Color: " << color << "; Year: " << year << std::endl;
+  //  std::cout << "State: " << reg_state << "; Body: " << v_body_type << "; Make: "
+  //    << v_make << "; Color: " << color << "; Year: " << year << std::endl;
   }
-  std::set<Ticket*> result = std::set_difference(std::set_difference(std::set_difference(,), ),
-                                                 std::set_difference(,));
+
+  //ds_1.sizes();
+  std::cout << "Prob of a thing: " << ds_1.query(NY, SUBN, RED, BMW, 2015, 7) << std::endl;
+
   return 0;
 }
 

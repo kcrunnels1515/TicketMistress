@@ -62,11 +62,10 @@ struct Ticket {
   Model _model;
   Color _color;
   Make _make;
-  Time _time;
   Year _year;
   Ticket() {}
-  Ticket(State state, Make make, Color color, Model model, Time time, Year year)
-    : _state(state), _model(model), _color(color), _make(make), _time(time), _year(year) {}
+  Ticket(State state, Make make, Color color, Model model, Year year)
+    : _state(state), _model(model), _color(color), _make(make), _year(year) {}
   ~Ticket() {}
 };
 
