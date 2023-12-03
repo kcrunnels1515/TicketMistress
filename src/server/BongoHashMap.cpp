@@ -2,9 +2,9 @@
 
 BongoHashMap::BongoHashMap(){};
 
-void BongoHashMap::addCase(string state, string make, string model, string color, string time){
+void BongoHashMap::addCase(State state, Make make, Model model, Color color, Time time){
     std::cout << state << make << model << color << time << "\n";
-    State stateVal = state;
+    std::cout << state << (int)make << model << color << time << "\n";
 };
 vector<int> BongoHashMap::getCase(){
     vector<int> vec;

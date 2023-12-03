@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "Ticket.hpp"
 
 using namespace std;
 
@@ -17,7 +18,7 @@ private:
 public:
     BongoHashMap();
 
-    void addCase(string state, string make, string model, string color, string time);
+    void addCase(State state, Make make, Model model, Color color, Time time);
     vector<int> getCase();
     vector<vector<int>> getAllCases();
     int hashFunction(int state, int make, int model, int color, int time);
