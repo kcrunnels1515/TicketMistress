@@ -69,6 +69,8 @@ int main(int argc,char* argv[]) {
     std::cout << "State: " << reg_state << "; Body: " << v_body_type << "; Make: "
       << v_make << "; Time of Obsv: " << voi_time << "; Color: " << color << "; Year: " << year << std::endl;
   }
+  std::set<Ticket*> result = std::set_difference(std::set_difference(std::set_difference(,), ),
+                                                 std::set_difference(,));
   return 0;
 }
 

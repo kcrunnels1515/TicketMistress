@@ -21,6 +21,18 @@ class BongoTree {
     _colors[temp->_color].insert(temp);
     _makes[temp->_make].insert(temp);
     _times[temp->_time].insert(temp);
+    _size++;
+  }
+  void query(State state, Model model, Color color,
+             Make make, Time time, char dep_vars) {
+    // first 5 chars mark state, model, color, make, time
+    // complement of
+
+    std::set<Ticket*>& selected_data = ;
+
+    if ((dep_vars & 32) == 32) {
+
+    }
   }
 };
 
