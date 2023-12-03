@@ -534,7 +534,7 @@ std::vector<string> Window::start(){
 
 void Window::SecondScreen(vector<string>& infoVec, sf::RenderWindow& window) {
     vector<vector<string>> data;
-    data = {{"florida", "toyota", "four door", "blue", "2:37pm", "2007"},{"florida", "toyota", "four door", "blue", "2:38pm", "2007"},{"florida", "toyota", "four door", "blue", "2:39pm", "2007"},{"florida", "toyota", "four door", "blue", "2:30pm", "2007"},{"florida", "toyota", "four door", "blue", "2:31pm", "2007"},{"florida", "toyota", "four door", "blue", "2:32pm", "2007"},{"florida", "toyota", "four door", "blue", "2:33pm", "2007"},{"florida", "toyota", "four door", "blue", "2:34pm", "2007"}};
+    data = {{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"}};
     int curr = 0;
     int scrollVal = 0;
     sf::RectangleShape Box;//= sf::Rect(400, 350, 100, 50);
@@ -571,22 +571,24 @@ void Window::SecondScreen(vector<string>& infoVec, sf::RenderWindow& window) {
                 else if(j == 1){
                     infoString1 += "Make: ";
                     infoString1 += data[scrollVal+i][j];
-                    infoString1 += "\t";
+//                    infoString1 += "\t";
                 }
                 else if(j == 2){
-                    infoString1 += "Model: ";
-                    infoString1 += data[scrollVal+i][j];
+                    infoString2 += "Model: ";
+                    infoString2 += data[scrollVal+i][j];
+                    infoString2 += "\t";
                 }
                 else if(j == 3){
                     infoString2 += "Color: ";
                     infoString2 += data[scrollVal+i][j];
                     infoString2 += "\t";
                 }
+//                else if(j == 4){
+//                    infoString2 += "Time: ";
+//                    infoString2 += data[scrollVal+i][j];
+//                    infoString2 += "\t";
+//                }
                 else if(j == 4){
-                    infoString2 += "Time: ";
-                    infoString2 += data[scrollVal+i][j];
-                    infoString2 += "\t";
-                }else if(j == 5){
                     infoString2 += "Year: ";
                     infoString2 += data[scrollVal+i][j];
                 }
