@@ -6,14 +6,15 @@ enum State {
   HI, ID, IL, IN, IA, KS, KY, LA, ME, MD, MA,
   MI, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY,
   NC, ND, OH, OK, OR, PA, RI, SC, SD, TN, TX,
-  UT, VT, VA, WA, WV, WI, WY
+  UT, VT, VA, WA, WV, WI, WY, NOWHERE
 };
 
 enum Make {
   ACURA, ALPINA, ALFAROM, AUDI, BENZ, BMW, BUICK, CHEVY, FORD, GMC, HONDA, HYUND,
   NISSAN, RAM, SUBARU, TESLA, TOYOTA, VOLKS, CHRYS, DODGE, FIAT, GM, ISUZU, CADDIE,
   INTERNATL, JAG, KWORTH, LAMBO, LEXUS, LINCOLN, ROVER, MACK, MASR, MERC, MINI, MITSU,
-  PORSCE, PONTIAC, SATURN, SMART, SUZUKU, UD, VOLVO, WORKHORS, OTHER, JEEP, KIA, MAZDA
+  PORSCE, PONTIAC, SATURN, SMART, SUZUKU, UD, VOLVO, WORKHORS, OTHER, JEEP, KIA, MAZDA,
+  VEHICLE
 };
 
 enum Color {
@@ -27,7 +28,10 @@ enum Color {
 };
 
 enum Model {
-  SEDAN,
+  MOTORCYCLE,
+  SPORT,
+  SUBN,
+  SEDAN4D,
   SUV,
   ELECTRIC,
   MINIVAN,
@@ -45,12 +49,12 @@ enum Model {
   SEMI,
   FWD,
   TWD,
-  CONV
+  CONV,
+  DIM3
 };
 
-enum Time {
-  MIDNIGHT,
-};
+typedef int Time;
+typedef int Year;
 
 struct Ticket {
   State _state; // map to set of elements with same state ps, don't use unordered set,
@@ -59,8 +63,10 @@ struct Ticket {
   Color _color;
   Make _make;
   Time _time;
-  Ticket(State state, Make make, Color color, Model model, Time time)
-    : _state(state), _model(model), _color(color), _make(make), _time(time) {}
+  Year _year;
+  Ticket() {}
+  Ticket(State state, Make make, Color color, Model model, Time time, Year year)
+    : _state(state), _model(model), _color(color), _make(make), _time(time), _year(year) {}
   ~Ticket() {}
 };
 

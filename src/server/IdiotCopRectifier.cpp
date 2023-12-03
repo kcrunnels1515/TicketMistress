@@ -1,5 +1,4 @@
-#include <map>
-#include "Ticket.hpp"
+#include "IdiotCopRectifier.hpp"
 
  void make_names(std::map<std::string,Make> &total) {
   total["AC"] = ACURA;
@@ -169,7 +168,7 @@ void state_names(std::map<std::string,State>& states) {
   states["WY"] = WY;
 }
 
-void color_names(std::map<std::string,Color>& colors) {
+void colors_names(std::map<std::string,Color>& colors) {
   colors["BK"] = BLACK;
   colors["BK."] = BLACK;
   colors["B"] = BLACK;
@@ -237,4 +236,63 @@ void color_names(std::map<std::string,Color>& colors) {
   colors["YELL"] = YELLOW;
   colors["YELLO"] = YELLOW;
   colors["YW"] = YELLOW;
+}
+
+void model_names(std::map<std::string,Model>& bodies) {
+  bodies["2"] = SEDAN2D;
+  bodies["2D"] = SEDAN2D;
+  bodies["2DSD"] = SEDAN2D;
+  bodies["4"] = SEDAN4D;
+  bodies["4S"] = SEDAN4D;
+  bodies["4D"] = SEDAN4D;
+  bodies["4DSD"] = SEDAN4D;
+  bodies["BU"] = BUS;
+  bodies["BUS"] = BUS;
+  bodies["CO"] = CONV;
+  bodies["CON"] = CONV;
+  bodies["CONV"] = CONV;
+  bodies["DUM"] = DUMP;
+  bodies["DUMP"] = DUMP;
+  bodies["FL"] = FLATBED;
+  bodies["FLAT"] = FLATBED;
+  bodies["MO"] = MOPED;
+  bodies["MOP"] = MOPED;
+  bodies["MOPD"] = MOPED;
+  bodies["M"] = MOTORCYCLE;
+  bodies["MC"] = MOTORCYCLE;
+  bodies["MCY"] = MOTORCYCLE;
+  bodies["P"] = PICKUP;
+  bodies["PICK"] = PICKUP;
+  bodies["PK"] = PICKUP;
+  bodies["S"] = SEDAN4D;
+  bodies["SD"] = SEDAN4D;
+  bodies["SDN"] = SEDAN4D;
+  bodies["SE"] = SEDAN4D;
+  bodies["SED"] = SEDAN4D;
+  bodies["SEDN"] = SEDAN4D;
+  bodies["SEMI"] = SEMI;
+  bodies["SEM"] = SEMI;
+  bodies["SP"] = SPORT;
+  bodies["SPOR"] = SPORT;
+  bodies["ST"] = SPORT;
+  bodies["SU"] = SUBN;
+  bodies["SUB"] = SUBN;
+  bodies["SUBN"] = SUBN;
+  bodies["T"] = TAXI;
+  bodies["TA"] = TAXI;
+  bodies["TAX"] = TAXI;
+  bodies["TAXI"] = TAXI;
+  bodies["TI"] = TAXI;
+  bodies["TR"] = TRACTOR;
+  bodies["TRA"] = TRACTOR;
+  bodies["TRAC"] = TRACTOR;
+  bodies["TRL"] = TRAILER;
+  bodies["TRLR"] = TRAILER;
+  bodies["UT"] = UTILITY;
+  bodies["UTI"] = UTILITY;
+  bodies["UTIL"] = UTILITY;
+  bodies["VA"] = VAN;
+  bodies["VAN"] = VAN;
+  bodies["VN"] = VAN;
+  bodies["Van"] = VAN;
 }
