@@ -4,6 +4,7 @@
 #include "../lib/csv.hpp"
 #include "BongoTree.hpp"
 #include "Ticket.hpp"
+#include "IdiotCopRectifier.hpp"
 
 int main(int argc,char* argv[]) {
   if (argc < 3) {
@@ -32,4 +33,5 @@ int main(int argc,char* argv[]) {
 
 Ticket parse_to_ticket(std::string reg_state, std::string v_body_type, std::string v_make, std::string voi_time, std::string color, std::string year) {
 
+  return ;
 }
