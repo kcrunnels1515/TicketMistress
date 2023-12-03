@@ -20,7 +20,10 @@ enum Color {
   RED, ORANGE, YELLOW,
   GREEN, BLUE, PURPLE,
   BLACK, GREY, UNKNOWN,
-  BROWN, GOLD,
+  BROWN, GOLD, WHITE,
+  LIGHT, NAVY, PINK,
+  REDORANGE, SILVER,
+  TAN
 };
 
 enum Model {
@@ -28,7 +31,21 @@ enum Model {
   SUV,
   ELECTRIC,
   MINIVAN,
-  PICKUP
+  PICKUP,
+  BUS,
+  DUMP,
+  FLATBED,
+  MOPED,
+  SEDAN2D,
+  TAXI,
+  TRACTOR,
+  TRAILER,
+  UTILITY,
+  VAN,
+  SEMI,
+  FWD,
+  TWD,
+  CONV
 };
 
 enum Time {
