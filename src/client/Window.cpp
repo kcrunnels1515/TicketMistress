@@ -12,7 +12,11 @@ sf::RectangleShape Window::setRectangle(sf::Vector2f s,float x, float y, float o
 
 void Window::printText(string txt, bool u, float x, float y, sf::RenderWindow *window, int f_size, bool w, bool bold){
     sf::Font font;
+<<<<<<< HEAD
     if (!font.loadFromFile("../TicketMistressFront/src/font.ttf")){
+=======
+    if (!font.loadFromFile("../TicketMistress/src/client/font.ttf")){
+>>>>>>> main
         throw("Font broke");
     }
 
@@ -52,7 +56,11 @@ Window::Window() {
 std::vector<string> Window::start(){
 
     std::vector<std::string> statesList = {
+<<<<<<< HEAD
             "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
+=======
+            "","Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
+>>>>>>> main
             "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
             "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri",
             "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York",
@@ -62,7 +70,11 @@ std::vector<string> Window::start(){
     };
 
     std::vector<std::string> makesList = {
+<<<<<<< HEAD
             "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
+=======
+            "","Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
+>>>>>>> main
             "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri",
             "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York",
             "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island",
@@ -71,13 +83,21 @@ std::vector<string> Window::start(){
     };
 
     std::vector<std::string> modelsList = {
+<<<<<<< HEAD
             "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island",
+=======
+            "","North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island",
+>>>>>>> main
             "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington",
             "West Virginia", "Wisconsin", "Wyoming"
     };
 
     std::vector<std::string> colorsList = {
+<<<<<<< HEAD
             "Blue", "Black", "Red", "Yellow", "Yellow1", "Yellow2", "Yellow3", "Yellow4"
+=======
+            "","Blue", "Black", "Red", "Yellow", "Yellow1", "Yellow2", "Yellow3", "Yellow4"
+>>>>>>> main
     };
 
 
@@ -131,7 +151,11 @@ std::vector<string> Window::start(){
     std::vector<sf::RectangleShape> statesBox, modelsBox, makesBox, colorsBox;
 
     sf::Font font;
+<<<<<<< HEAD
     if (!font.loadFromFile("../TicketMistressFront/src/font.ttf")){
+=======
+    if (!font.loadFromFile("../TicketMistress/src/client/font.ttf")){
+>>>>>>> main
         throw("Font broke");
     }
 
@@ -372,7 +396,24 @@ std::vector<string> Window::start(){
                 infoVec[1] = make;
                 infoVec[2] = model;
                 infoVec[3] = color;
+<<<<<<< HEAD
                 SecondScreen(infoVec, window);
+=======
+                int blanks = 0;
+                for(auto item : infoVec){
+                    if(item == ""){
+                        blanks ++;
+                    }
+
+                }
+                if(blanks > 3){
+
+                }
+                else{
+                    SecondScreen(infoVec, window);
+                }
+
+>>>>>>> main
             }
         }
 
@@ -459,9 +500,12 @@ std::vector<string> Window::start(){
     return infoVec;
 }
 
+<<<<<<< HEAD
 void namesToPics(){
 
 }
+=======
+>>>>>>> main
 
 void Window::SecondScreen(vector<string>& infoVec, sf::RenderWindow& window) {
     vector<vector<string>> data;

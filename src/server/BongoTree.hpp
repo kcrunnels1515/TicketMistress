@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include <set>
+#include <algorithm>
 
 class BongoTree {
   private:
@@ -15,13 +16,26 @@ class BongoTree {
   std::map<Time,std::set<Ticket*>>  _times;
   public:
   BongoTree() {}
-  void insert(State state, Model model, Color color, Make make, Time time) {
-    Ticket* temp = new Ticket(state,model,color,make,time);
-    _states[state].insert(temp);
-    _models[model].insert(temp);
-    _colors[color].insert(temp);
-    _makes[make].insert(temp);
-    _times[time].insert(temp);
+  void insert(Ticket* temp) {
+    _states[temp->_state].insert(temp);
+    _models[temp->_model].insert(temp);
+    _colors[temp->_color].insert(temp);
+    _makes[temp->_make].insert(temp);
+    _times[temp->_time].insert(temp);
+    _size++;
+  }
+  void query(State state, Model model, Color color,
+             Make make, Time time, char indep_vars) {
+    // first 5 chars mark state, model, color, make, time
+    // complement of
+
+    std::set<Ticket*>& selected_data = {};
+    std::set_intersection(_states[state].begin(), _states[state].end(),
+                          _models[model].begin(), _models[model].end(),
+                          std::inserter(selected_data, selected_data.begin()));
+    if ((indep_vars & 32) == 32) {
+
+    }
   }
 };
 
