@@ -48,29 +48,24 @@ int main(int argc,char* argv[]) {
     } else {
       temp->_state = NOWHERE;
     }
-    if (auto search = makes_map.find(reg_state); search != makes_map.end()) {
+    if (auto search = makes_map.find(v_make); search != makes_map.end()) {
       temp->_make = search->second;
     } else {
       temp->_make = VEHICLE;
     }
-    if (auto search = color_map.find(reg_state); search != color_map.end()) {
+    if (auto search = color_map.find(color); search != color_map.end()) {
       temp->_color = search->second;
     } else {
       temp->_color = UNKNOWN;
     }
-    if (auto search = model_map.find(reg_state); search != model_map.end()) {
+    if (auto search = model_map.find(v_body_type); search != model_map.end()) {
       temp->_model = search->second;
     } else {
       temp->_model = DIM3;
     }
     temp->_year = interpret_year(year);
     ds_1.insert(temp);
-  //  std::cout << "State: " << reg_state << "; Body: " << v_body_type << "; Make: "
-  //    << v_make << "; Color: " << color << "; Year: " << year << std::endl;
   }
-
-  //ds_1.sizes();
-  std::cout << "Prob of a thing: " << ds_1.query(NY, SUBN, RED, BMW, 2015, 7) << std::endl;
 
   return 0;
 }

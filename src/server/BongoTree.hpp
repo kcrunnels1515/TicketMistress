@@ -78,7 +78,7 @@ class BongoTree {
         free_vars_all.insert(it->second.begin(), it->second.end());
       }
     }
-    std::cout << "dep_var_set_size: " << dep_var_set.size() << std::endl;
+    //std::cout << "dep_var_set_size: " << dep_var_set.size() << std::endl;
     free_vars_sel = _states[state];
 
     if ((dep_vars & 8) == 8) {
@@ -133,7 +133,6 @@ class BongoTree {
     free_vars_sel = intersect(free_vars_sel, _years[year]);
     float dep_var_size = (float) intersect(dep_var_set, free_vars_sel).size();
     float everything_else = (float) intersect(free_vars_all,free_vars_sel).size();
-    std::cout << "dep_vars: " << dep_var_size << "; everything else: " << everything_else << std::endl;
     return dep_var_size / everything_else;
   }
 };

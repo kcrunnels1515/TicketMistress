@@ -9,7 +9,7 @@ build-client:
 	g++ -Werror -Wuninitialized -o ./build/client ./src/client/*.cpp -lsfml-graphics -lsfml-window -lsfml-system
 
 build-server:
-	g++ -Werror -Wuninitialized -o ./build/server ./src/server/*.cpp
+	g++ -g -Werror -Wuninitialized -o ./build/server ./src/server/*.cpp
 
 clean:
 	rm -f ./build/*

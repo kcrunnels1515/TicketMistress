@@ -31,7 +31,7 @@
   total["GMC"] = GMC;
   total["HO"] = HONDA;
   total["HOND"] = HONDA;
-  total["HOND"] = HONDA;
+  total["HONDA"] = HONDA;
   total["HY"] = HYUND;
   total["HYU"] = HYUND;
   total["HYUN"] = HYUND;
