@@ -15,17 +15,11 @@
 Year interpret_year(std::string year);
 
 int main(int argc,char* argv[]) {
-  if (argc < 3) {
-    std::cout << "Input: ./server [port] [csv file]" << std::endl;
+  if (argc < 2) {
+    std::cout << "Input: ./server [csv file]" << std::endl;
     return -1;
   }
-  int port;
-  try {
-    port = std::stoi(argv[1]);
-  } catch (std::invalid_argument) {
-    std::cout << "Not a number" << std::endl;
-  }
-  std::ifstream file(argv[2]);
+  std::ifstream file(argv[1]);
   if(!file.is_open()){
      std::cout << "File not found" << std::endl;
      return -1;
@@ -43,7 +37,7 @@ int main(int argc,char* argv[]) {
   std::map<std::string,State> state_map;
   state_names(state_map);
 
-  io::CSVReader<5> in(argv[2]);
+  io::CSVReader<5> in(argv[1]);
   in.read_header(io::ignore_extra_column, "reg_state","v_body_type","v_make","color","year");
   std::string reg_state, v_body_type, v_make, color, year;
   std::cout << "Building database..." << std::endl;
