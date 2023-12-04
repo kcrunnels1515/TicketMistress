@@ -172,6 +172,7 @@ int BongoHashMap::hashFunction(State state, Make make, Model model, Color color,
 };
 
 int BongoHashMap::hashFunctionInt(int state, int make, int model, int color, int year) {
+
     int hashVal = 0;
 
     hashVal += state;
@@ -181,7 +182,7 @@ int BongoHashMap::hashFunctionInt(int state, int make, int model, int color, int
     hashVal += year * numColors * numModels * numMakes * numStates;
 
     return hashVal;
-};
+}
 
 int BongoHashMap::sizeOfMap() {
     return size;
