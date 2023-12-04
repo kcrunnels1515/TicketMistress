@@ -49,38 +49,73 @@ Window::Window() {
 
 }
 
-std::vector<string> Window::start(){
+std::vector<string> Window::start(BongoTree& btree){
 
-    std::vector<std::string> statesList = {
-            "","Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
-            "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
-            "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri",
-            "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York",
-            "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island",
-            "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington",
-            "West Virginia", "Wisconsin", "Wyoming"
-    };
-
-    std::vector<std::string> makesList = {
-            "","Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
-            "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri",
-            "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York",
-            "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island",
-            "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington",
-            "West Virginia", "Wisconsin", "Wyoming"
-    };
-
-    std::vector<std::string> modelsList = {
-            "","North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island",
-            "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington",
-            "West Virginia", "Wisconsin", "Wyoming"
-    };
-
-    std::vector<std::string> colorsList = {
-            "","Blue", "Black", "Red", "Yellow", "Yellow1", "Yellow2", "Yellow3", "Yellow4"
+    std::vector<std::pair<State, std::string>> statesList = {
+    {NOWHERE, ""}, {AL, "Alabama"}, {AK, "Alaska"}, {AZ, "Arizona"}, {AR, "Arkansas"}, {CA, "California"}, {CO, "Colorado"}, {CT, "Connecticut"}, {DE, "Delaware"},
+    {FL, "Florida"}, {GA, "Georgia"}, {HI, "Hawaii"}, {ID, "Idaho"}, {IL, "Illinois"}, {IN, "Indiana"}, {IA, "Iowa"}, {KS, "Kansas"}, {KY, "Kentucky"},
+    {LA, "Louisiana"}, {ME, "Maine"}, {MD, "Maryland"}, {MA, "Massachusetts"}, {MI, "Michigan"}, {MN, "Minnesota"}, {MS, "Mississippi"}, {MO, "Missouri"},
+    {MT, "Montana"}, {NE, "Nebraska"}, {NV, "Nevada"}, {NH, "New Hampshire"}, {NJ, "New Jersey"}, {NM, "New Mexico"}, {NY, "New York"},
+    {NC, "North Carolina"}, {ND, "North Dakota"}, {OH, "Ohio"}, {OK, "Oklahoma"}, {OR, "Oregon"}, {PA, "Pennsylvania"}, {RI, "Rhode Island"},
+    {SC, "South Carolina"}, {SD, "South Dakota"}, {TN, "Tennessee"}, {TX, "Texas"}, {UT, "Utah"}, {VT, "Vermont"}, {VA, "Virginia"}, {WA, "Washington"},
+    {WV, "West Virginia"}, {WI, "Wisconsin"}, {WY, "Wyoming"}
     };
 
 
+    std::vector<std::pair<Make,std::string>> makesList = {
+        {ACURA,"Acura"}, {ALPINA,"Alpina"}, {ALFAROM,"Alfa Romero"}, {AUDI,"Audi"}, {BENZ,"Mercedes-Benz"}, {BMW,"BMW"}, {BUICK,"BUICK"}, {CHEVY,"Chevrolet"}, {FORD,"Ford"}, {GMC,"GMC"},
+        {HONDA,"Honda"}, {HYUND,"Hyundai"}, {NISSAN,"Nissan"}, {RAM,"RAM"}, {SUBARU,"Subaru"}, {TESLA,"Tesla"}, {TOYOTA,"Toyota"}, {VOLKS,"Volkswagon"}, {CHRYS,"Chrystler"}, {DODGE,"Dodge"},
+        {FIAT,"Fiat"}, {GM,"General Motors"}, {ISUZU,"Isuzu"}, {CADDIE,"Cadilac"}, {INTERNATL,"International"}, {JAG,"JAGUAR"}, {KWORTH,"Kenworth"}, {LAMBO,"Lambourghini"}, {LEXUS,"Lexus"}, {LINCOLN,"Lincoln"},
+        {ROVER,"Rover"}, {MACK,"Mack"}, {MASR,"Maserati"}, {MERC,"Mercury"}, {MINI,"Mini"}, {MITSU,"Mitsubishi"}, {PORSCE,"Porsce"}, {PONTIAC,"Pontiac"}, {SATURN,"Saturn"}, {SMART,"Smart"},
+        {SUZUKU,"Suzuku"}, {UD,"UD"}, {VOLVO,"Volvo"}, {WORKHORS,"Workhorse"}, {JEEP,"Jeep"}, {KIA,"Kia"}, {MAZDA,"Mazda"}, {VEHICLE,""}
+    };
+
+    std::vector<std::pair<Model,std::string>> modelsList = {
+        {MOTORCYCLE,"Motorcycle"},
+        {SPORT,"Sports Car"},
+        {SUBN,"Suburban"},
+        {SEDAN4D,"Four Door Sedan"},
+        {SUV,"Sports Utility Vehicle"},
+        {ELECTRIC,"Electric"},
+        {MINIVAN,"Minivan"},
+        {PICKUP,"Pickup Truck"},
+        {BUS,"Bus"},
+        {DUMP,"Dump Truck"},
+        {FLATBED,"Flatbed Truck"},
+        {MOPED,"Moped"},
+        {SEDAN2D,"Two Door Sedan"},
+        {TAXI,"Taxi"},
+        {TRACTOR,"Tractor"},
+        {TRAILER,"Trailer"},
+        {UTILITY,"Utility Vehicle"},
+        {VAN,"Van"},
+        {SEMI,"Semi Truck"},
+        {FWD,"Four-Wheel Drive"},
+        {TWD,"Two-Wheel Drive"},
+        {CONV,"Convertable"},
+        {DIM3,"Three Dimensional Object"},
+    };
+
+    std::vector<std::pair<Color,std::string>> colorsList = {
+        {RED,"Red"},
+        {ORANGE,"Orange"},
+        {YELLOW,"Yellow"},
+        {GREEN,"Green"},
+        {BLUE,"Blue"},
+        {PURPLE,"Purple"},
+        {BLACK,"Black"},
+        {GREY,"Grey"},
+        {UNKNOWN,""},
+        {BROWN,"Brown"},
+        {GOLD,"Gold"},
+        {WHITE,"White"},
+        {LIGHT,"Light-colored"},
+        {NAVY,"Navy"},
+        {PINK,"Pink"},
+        {REDORANGE,"Red-Orange"},
+        {SILVER,"Silver"},
+        {TAN,"Tan"},
+    };
 
     int curr = 0;
     int listIndex = 0;
@@ -99,6 +134,11 @@ std::vector<string> Window::start(){
     bool modelSelection = false;
     bool colorSelection = false;
     bool yearSelection = false;
+    bool state_not_varied = true;
+    bool make_not_varied = true;
+    bool model_not_varied = true;
+    bool color_not_varied = true;
+    bool year_not_varied = true;
     sf::RenderWindow window(sf::VideoMode(32*width, 32*height+100), "Ticket Mistress", sf::Style::Close);
     window.setFramerateLimit(60);
     sf::RectangleShape bkgd = setRectangle(sf::Vector2f(800,600),0,0,0,0, sf::Color::White);
@@ -136,6 +176,40 @@ std::vector<string> Window::start(){
     YearBox.setOutlineColor(sf::Color::Black);
     YearBox.setOutlineThickness(10);
 
+    sf::RectangleShape StateCheckBox;//= sf::Rect(400, 350, 100, 50);
+    StateCheckBox.setPosition(610, 210-100);
+    StateCheckBox.setSize(sf::Vector2f(50,50));
+    //StateCheckBox.setFillColor(sf::Color::Black);
+    StateCheckBox.setOutlineColor(sf::Color::Black);
+    StateCheckBox.setOutlineThickness(10);
+
+    sf::RectangleShape MakeCheckBox;//= sf::Rect(400, 350, 100, 50);
+    MakeCheckBox.setPosition(610, 285-100);
+    MakeCheckBox.setSize(sf::Vector2f(50,50));
+    //MakeCheckBox.setFillColor(sf::Color::Black);
+    MakeCheckBox.setOutlineColor(sf::Color::Black);
+    MakeCheckBox.setOutlineThickness(10);
+
+    sf::RectangleShape ModelCheckBox;//= sf::Rect(400, 350, 100, 50);
+    ModelCheckBox.setPosition(610, 360-100);
+    ModelCheckBox.setSize(sf::Vector2f(50,50));
+    //ModelCheckBox.setFillColor(sf::Color::Black);
+    ModelCheckBox.setOutlineColor(sf::Color::Black);
+    ModelCheckBox.setOutlineThickness(10);
+
+    sf::RectangleShape ColorCheckBox;//= sf::Rect(400, 350, 100, 50);
+    ColorCheckBox.setPosition(610, 435-100);
+    ColorCheckBox.setSize(sf::Vector2f(50,50));
+    ColorCheckBox.setOutlineColor(sf::Color::Black);
+    ColorCheckBox.setOutlineThickness(10);
+
+    sf::RectangleShape YearCheckBox;
+    YearCheckBox.setPosition(610,410);
+    YearCheckBox.setSize(sf::Vector2f (50,50));
+    YearCheckBox.setOutlineColor(sf::Color::Black);
+    YearCheckBox.setOutlineThickness(10);
+
+
     sf::RectangleShape submitBox;
     submitBox.setPosition(50,185);
     submitBox.setSize(sf::Vector2f (100,50));
@@ -143,7 +217,10 @@ std::vector<string> Window::start(){
     submitBox.setOutlineThickness(10);
 
     std::vector<sf::RectangleShape> statesBox, modelsBox, makesBox, colorsBox;
-
+    State state_var;
+    Color color_var;
+    Model model_var;
+    Make make_var;
 
     sf::Font font;
     if (!font.loadFromFile("../TicketMistress/src/client/font.ttf")){
@@ -180,7 +257,8 @@ std::vector<string> Window::start(){
                 if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && infoType == 0) {
                     for (int i = 0; i < statesBox.size(); i++) {
                         if (statesBox[i].getGlobalBounds().contains(position.x, position.y)) {
-                            name = statesList[i + listIndex];
+                            name = statesList[i + listIndex].second;
+                            state_var = statesList[i + listIndex].first;
                             stateSelection = false;
                             selected = false;
                             infoType = -1;
@@ -221,7 +299,8 @@ std::vector<string> Window::start(){
                             //makesBox[i]
                             if (makesBox[i].getGlobalBounds().contains(position.x, position.y)) {
                                 //mfake = makesBox[]
-                                make = makesList[i + listIndex];
+                                make = makesList[i + listIndex].second;
+                                make_var = makesList[i + listIndex].first;
                                 makeSelection = false;
                                 selected = false;
                                 infoType = -1;
@@ -262,7 +341,8 @@ std::vector<string> Window::start(){
                         if (modelsBox[i].getGlobalBounds().contains(position.x, position.y)) {
                             //mfake = modelsBox[]
 //                            std::cout << listIndex << std::endl;
-                            model = modelsList[i + listIndex];
+                            model = modelsList[i + listIndex].second;
+                            model_var = modelsList[i + listIndex].first;
                             modelSelection = false;
                             selected = false;
                             infoType = -1;
@@ -301,7 +381,8 @@ std::vector<string> Window::start(){
                         if (colorsBox[i].getGlobalBounds().contains(position.x, position.y)) {
                             //mfake = modelsBox[]
 //                            std::cout << listIndex << std::endl;
-                            color = colorsList[i + listIndex];
+                            color = colorsList[i + listIndex].second;
+                            color_var = colorsList[i + listIndex].first;
                             colorSelection = false;
                             selected = false;
                             infoType = -1;
@@ -350,19 +431,25 @@ std::vector<string> Window::start(){
                     infoVec[2] = model;
                     infoVec[3] = color;
                     infoVec[4] = year;
-                    int blanks = 0;
-                    for(auto item : infoVec){
-                        if(item == ""){
-                            blanks ++;
+                    try {
+                        Ticket temp = Ticket(state_var,make_var,color_var,model_var,std::stoi(year));
+                        int blanks = 0;
+                        for(auto item : infoVec){
+                            if(item == ""){
+                                blanks ++;
+                            }
+
                         }
+                        if(blanks > 0){
+
+                        }
+                        else{
+                            SecondScreen(temp, window, btree);
+                        }
+                    } catch (std::invalid_argument) {
 
                     }
-                    if(blanks > 3){
 
-                    }
-                    else{
-                        SecondScreen(infoVec, window);
-                    }
                 }
                 if(StateBox.getGlobalBounds().contains(position.x, position.y)){
                     infoType = 0;
@@ -403,6 +490,20 @@ std::vector<string> Window::start(){
                     modelSelection = false;
                     colorSelection = false;
                     yearSelection = true;
+                } else if(StateCheckBox.getGlobalBounds().contains(position.x, position.y)){
+                    state_not_varied = !state_not_varied;
+                }
+                else if(MakeCheckBox.getGlobalBounds().contains(position.x, position.y)){
+                    make_not_varied = !make_not_varied;
+                }
+                else if(ModelCheckBox.getGlobalBounds().contains(position.x, position.y)){
+                    model_not_varied = !model_not_varied;
+                }
+                else if(ColorCheckBox.getGlobalBounds().contains(position.x, position.y)){
+                    color_not_varied = !color_not_varied;
+                }
+                else if(YearCheckBox.getGlobalBounds().contains(position.x,position.y)){
+                    year_not_varied = !color_not_varied;
                 }
                 else{
                     infoType = -1;
@@ -412,6 +513,7 @@ std::vector<string> Window::start(){
                     colorSelection = false;
                     yearSelection = false;
                 }
+
                 // in any of the text rectangles
                 //listIndex = 0;
             }
@@ -421,20 +523,24 @@ std::vector<string> Window::start(){
                 infoVec[2] = model;
                 infoVec[3] = color;
                 infoVec[4] = year;
-                int blanks = 0;
-                for(auto item : infoVec){
-                    if(item == ""){
-                        blanks ++;
+                try {
+                        Ticket temp = Ticket(state_var,make_var,color_var,model_var,std::stoi(year));
+                        int blanks = 0;
+                        for(auto item : infoVec){
+                            if(item == ""){
+                                blanks ++;
+                            }
+
+                        }
+                        if(blanks > 0){
+
+                        }
+                        else{
+                            SecondScreen(temp, window, btree);
+                        }
+                    } catch (std::invalid_argument) {
+
                     }
-
-                }
-                if(blanks > 3){
-
-                }
-                else{
-                    SecondScreen(infoVec, window);
-                }
-
             }
         }
 
@@ -445,6 +551,11 @@ std::vector<string> Window::start(){
         window.draw(ModelBox);
         window.draw(ColorBox);
         window.draw(YearBox);
+        window.draw(StateCheckBox);
+        window.draw(MakeCheckBox);
+        window.draw(ModelCheckBox);
+        window.draw(ColorCheckBox);
+        window.draw(YearCheckBox);
         window.draw(submitBox);
 
         printText("Welcome To Ticket Mistress!", true, width*16, 16 * height + -100-100, &window, 24, true, true);
@@ -480,12 +591,29 @@ std::vector<string> Window::start(){
             printText("Your Car Year: "+year, false, width*16, 16 * height + 175 , &window, 18, false, true);
         };
 
+
+        if(!state_not_varied) {
+            printText("X", false, 635, 135, &window, 25, false, true);
+        }
+        if(!make_not_varied) {
+            printText("X", false, 635, 210, &window, 25, false, true);
+        }
+        if(!model_not_varied) {
+            printText("X", false, 635, 285, &window, 25, false, true);
+        }
+        if(!color_not_varied) {
+            printText("X", false, 635, 360, &window, 25, false, true);
+        }
+        if(!year_not_varied) {
+            printText("X", false, 635, 435,  &window, 25, false, true);
+        }
+
         if(!selected && infoType == 0){
             for(auto nextState : statesBox){
                 window.draw(nextState);
             }
             for(int i = 0; i < 5; i++){
-                printText(statesList[i + listIndex], false, 400, 50 * i + 280-100, &window, 18, true, true);
+                printText(statesList[i + listIndex].second, false, 400, 50 * i + 280-100, &window, 18, true, true);
             }
         }
         if(!selected && infoType == 1){
@@ -495,7 +623,7 @@ std::vector<string> Window::start(){
             for (int i = 0; i < 5; i++) {
                 //edit for make location
                 //states list changed to make list
-                printText(makesList[i + listIndex], false, 400, 50 * i + 350-100, &window, 18, true, true);
+                printText(makesList[i + listIndex].second, false, 400, 50 * i + 350-100, &window, 18, true, true);
             }
         }
         //working on this one
@@ -506,7 +634,7 @@ std::vector<string> Window::start(){
             for (int i = 0; i < 5; i++) {
                 //edit for make location
                 //states list changed to model list
-                printText(modelsList[i + listIndex], false, 400, 50 * i + 430-100, &window, 18, true, true);
+                printText(modelsList[i + listIndex].second, false, 400, 50 * i + 430-100, &window, 18, true, true);
             }
         }
 
@@ -517,7 +645,7 @@ std::vector<string> Window::start(){
             for (int i = 0; i < 4; i++) {
                 //edit for make location
                 //states list changed to model list
-                printText(colorsList[i + listIndex], false, 400, 50 * i + 510-100, &window, 18, true, true);
+                printText(colorsList[i + listIndex].second, false, 400, 50 * i + 510-100, &window, 18, true, true);
             }
         }
 
@@ -533,7 +661,7 @@ std::vector<string> Window::start(){
 }
 
 
-void Window::SecondScreen(vector<string>& infoVec, sf::RenderWindow& window) {
+void Window::SecondScreen(Ticket input_match, sf::RenderWindow& window, BongoTree& btree) {
     vector<vector<string>> data;
     data = {{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"}};
     int curr = 0;
@@ -543,6 +671,12 @@ void Window::SecondScreen(vector<string>& infoVec, sf::RenderWindow& window) {
     Box.setSize(sf::Vector2f(50, 50));
     Box.setOutlineColor(sf::Color::Black);
     Box.setOutlineThickness(5);
+    sf::RectangleShape ResultBox;//= sf::Rect(400, 350, 100, 50);
+    ResultBox.setPosition(330, 415);
+    ResultBox.setSize(sf::Vector2f(150, 50));
+    ResultBox.setOutlineColor(sf::Color::Black);
+    ResultBox.setOutlineThickness(5);
+
     while(window.isOpen()){
         window.clear(sf::Color::White);
         sf::Event event;
@@ -604,7 +738,7 @@ void Window::SecondScreen(vector<string>& infoVec, sf::RenderWindow& window) {
 
 
         //text
-        printText(to_string(1+curr + scrollVal)+"\/" + to_string(data.size()), false, 400, 75+ max*70 -30 , &window, 18, false, true);
+        printText(to_string(1+curr + scrollVal)+"/" + to_string(data.size()), false, 400, 75+ max*70 -30 , &window, 18, false, true);
 
         while(window.pollEvent(event)){
             if (event.type == sf::Event::Closed) {
@@ -640,36 +774,12 @@ void Window::SecondScreen(vector<string>& infoVec, sf::RenderWindow& window) {
             }
         }
         window.draw(Box);
+        window.draw(ResultBox);
         printText("Back", true, 44, 50, &window, 18, false, true);
+        printText(to_string(btree.query(input_match, 23)), true, 398, 430, &window, 18, false, true);
         window.display();
     }
 
-}
+};
 
 
-
-void LoadingWindow::start() {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Loading...", sf::Style::Close);
-    window.setFramerateLimit(60);
-    sf::Font font;
-
-    sf::Sprite sprite;
-    sf::Texture texture;
-    texture.loadFromFile("../TicketMistress/src/client/smileyface.jpg");
-    sprite.setTexture(texture);
-    sprite.setPosition(0,0);
-
-    while (window.isOpen()){
-        sf::Event event;
-        while(window.pollEvent(event)){
-            if (event.type == sf::Event::Closed) {
-                window.close();
-            }
-        }
-        window.clear(sf::Color::White);
-        window.draw(sprite);
-        printText("Welcome. Please wait while the data is loading!", true, 400, 100, &window,18 ,false, true);
-
-        window.display();
-    }
-}
