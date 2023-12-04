@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Window.h"
-#pragma once
 
 sf::RectangleShape Window::setRectangle(sf::Vector2f s,float x, float y, float o_x, float o_y, sf::Color color){
     sf::RectangleShape rect;
@@ -135,6 +134,11 @@ std::vector<string> Window::start(BongoTree& btree){
     bool modelSelection = false;
     bool colorSelection = false;
     bool yearSelection = false;
+    bool state_not_varied = true;
+    bool make_not_varied = true;
+    bool model_not_varied = true;
+    bool color_not_varied = true;
+    bool year_not_varied = true;
     sf::RenderWindow window(sf::VideoMode(32*width, 32*height+100), "Ticket Mistress", sf::Style::Close);
     window.setFramerateLimit(60);
     sf::RectangleShape bkgd = setRectangle(sf::Vector2f(800,600),0,0,0,0, sf::Color::White);
@@ -171,6 +175,40 @@ std::vector<string> Window::start(BongoTree& btree){
     YearBox.setSize(sf::Vector2f (400,50));
     YearBox.setOutlineColor(sf::Color::Black);
     YearBox.setOutlineThickness(10);
+
+    sf::RectangleShape StateCheckBox;//= sf::Rect(400, 350, 100, 50);
+    StateCheckBox.setPosition(610, 210-100);
+    StateCheckBox.setSize(sf::Vector2f(50,50));
+    //StateCheckBox.setFillColor(sf::Color::Black);
+    StateCheckBox.setOutlineColor(sf::Color::Black);
+    StateCheckBox.setOutlineThickness(10);
+
+    sf::RectangleShape MakeCheckBox;//= sf::Rect(400, 350, 100, 50);
+    MakeCheckBox.setPosition(610, 285-100);
+    MakeCheckBox.setSize(sf::Vector2f(50,50));
+    //MakeCheckBox.setFillColor(sf::Color::Black);
+    MakeCheckBox.setOutlineColor(sf::Color::Black);
+    MakeCheckBox.setOutlineThickness(10);
+
+    sf::RectangleShape ModelCheckBox;//= sf::Rect(400, 350, 100, 50);
+    ModelCheckBox.setPosition(610, 360-100);
+    ModelCheckBox.setSize(sf::Vector2f(50,50));
+    //ModelCheckBox.setFillColor(sf::Color::Black);
+    ModelCheckBox.setOutlineColor(sf::Color::Black);
+    ModelCheckBox.setOutlineThickness(10);
+
+    sf::RectangleShape ColorCheckBox;//= sf::Rect(400, 350, 100, 50);
+    ColorCheckBox.setPosition(610, 435-100);
+    ColorCheckBox.setSize(sf::Vector2f(50,50));
+    ColorCheckBox.setOutlineColor(sf::Color::Black);
+    ColorCheckBox.setOutlineThickness(10);
+
+    sf::RectangleShape YearCheckBox;
+    YearCheckBox.setPosition(610,410);
+    YearCheckBox.setSize(sf::Vector2f (50,50));
+    YearCheckBox.setOutlineColor(sf::Color::Black);
+    YearCheckBox.setOutlineThickness(10);
+
 
     sf::RectangleShape submitBox;
     submitBox.setPosition(50,185);
@@ -393,20 +431,25 @@ std::vector<string> Window::start(BongoTree& btree){
                     infoVec[2] = model;
                     infoVec[3] = color;
                     infoVec[4] = year;
-                    Ticket temp = Ticket(state_var,make_var,color_var,model_var,std::stoi(year));
-                    int blanks = 0;
-                    for(auto item : infoVec){
-                        if(item == ""){
-                            blanks ++;
+                    try {
+                        Ticket temp = Ticket(state_var,make_var,color_var,model_var,std::stoi(year));
+                        int blanks = 0;
+                        for(auto item : infoVec){
+                            if(item == ""){
+                                blanks ++;
+                            }
+
                         }
+                        if(blanks > 0){
+
+                        }
+                        else{
+                            SecondScreen(temp, window, btree);
+                        }
+                    } catch (std::invalid_argument) {
 
                     }
-                    if(blanks > 3){
 
-                    }
-                    else{
-                        SecondScreen(temp, window, btree);
-                    }
                 }
                 if(StateBox.getGlobalBounds().contains(position.x, position.y)){
                     infoType = 0;
@@ -447,6 +490,20 @@ std::vector<string> Window::start(BongoTree& btree){
                     modelSelection = false;
                     colorSelection = false;
                     yearSelection = true;
+                } else if(StateCheckBox.getGlobalBounds().contains(position.x, position.y)){
+                    state_not_varied = !state_not_varied;
+                }
+                else if(MakeCheckBox.getGlobalBounds().contains(position.x, position.y)){
+                    make_not_varied = !make_not_varied;
+                }
+                else if(ModelCheckBox.getGlobalBounds().contains(position.x, position.y)){
+                    model_not_varied = !model_not_varied;
+                }
+                else if(ColorCheckBox.getGlobalBounds().contains(position.x, position.y)){
+                    color_not_varied = !color_not_varied;
+                }
+                else if(YearCheckBox.getGlobalBounds().contains(position.x,position.y)){
+                    year_not_varied = !color_not_varied;
                 }
                 else{
                     infoType = -1;
@@ -456,6 +513,7 @@ std::vector<string> Window::start(BongoTree& btree){
                     colorSelection = false;
                     yearSelection = false;
                 }
+
                 // in any of the text rectangles
                 //listIndex = 0;
             }
@@ -465,20 +523,24 @@ std::vector<string> Window::start(BongoTree& btree){
                 infoVec[2] = model;
                 infoVec[3] = color;
                 infoVec[4] = year;
-                int blanks = 0;
-                for(auto item : infoVec){
-                    if(item == ""){
-                        blanks ++;
+                try {
+                        Ticket temp = Ticket(state_var,make_var,color_var,model_var,std::stoi(year));
+                        int blanks = 0;
+                        for(auto item : infoVec){
+                            if(item == ""){
+                                blanks ++;
+                            }
+
+                        }
+                        if(blanks > 0){
+
+                        }
+                        else{
+                            SecondScreen(temp, window, btree);
+                        }
+                    } catch (std::invalid_argument) {
+
                     }
-                }
-                Ticket temp = Ticket(state_var,make_var,color_var,model_var,std::stoi(year));
-                if(blanks > 3){
-
-                }
-                else{
-                    SecondScreen(temp, window,btree);
-                }
-
             }
         }
 
@@ -489,6 +551,11 @@ std::vector<string> Window::start(BongoTree& btree){
         window.draw(ModelBox);
         window.draw(ColorBox);
         window.draw(YearBox);
+        window.draw(StateCheckBox);
+        window.draw(MakeCheckBox);
+        window.draw(ModelCheckBox);
+        window.draw(ColorCheckBox);
+        window.draw(YearCheckBox);
         window.draw(submitBox);
 
         printText("Welcome To Ticket Mistress!", true, width*16, 16 * height + -100-100, &window, 24, true, true);
@@ -523,6 +590,23 @@ std::vector<string> Window::start(BongoTree& btree){
         }else{
             printText("Your Car Year: "+year, false, width*16, 16 * height + 175 , &window, 18, false, true);
         };
+
+
+        if(!state_not_varied) {
+            printText("X", false, 635, 135, &window, 25, false, true);
+        }
+        if(!make_not_varied) {
+            printText("X", false, 635, 210, &window, 25, false, true);
+        }
+        if(!model_not_varied) {
+            printText("X", false, 635, 285, &window, 25, false, true);
+        }
+        if(!color_not_varied) {
+            printText("X", false, 635, 360, &window, 25, false, true);
+        }
+        if(!year_not_varied) {
+            printText("X", false, 635, 435,  &window, 25, false, true);
+        }
 
         if(!selected && infoType == 0){
             for(auto nextState : statesBox){
@@ -654,7 +738,7 @@ void Window::SecondScreen(Ticket input_match, sf::RenderWindow& window, BongoTre
 
 
         //text
-        printText(to_string(1+curr + scrollVal)+"\/" + to_string(data.size()), false, 400, 75+ max*70 -30 , &window, 18, false, true);
+        printText(to_string(1+curr + scrollVal)+"/" + to_string(data.size()), false, 400, 75+ max*70 -30 , &window, 18, false, true);
 
         while(window.pollEvent(event)){
             if (event.type == sf::Event::Closed) {
