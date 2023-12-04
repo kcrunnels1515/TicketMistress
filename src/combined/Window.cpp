@@ -665,6 +665,7 @@ void Window::SecondScreen(Ticket input_match, sf::RenderWindow& window, BongoTre
     vector<vector<string>> data;
     data = {{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"}};
     int curr = 0;
+    string prob = to_string(btree.query(input_match, 23));
     int scrollVal = 0;
     sf::RectangleShape Box;//= sf::Rect(400, 350, 100, 50);
     Box.setPosition(20, 40);
@@ -776,7 +777,7 @@ void Window::SecondScreen(Ticket input_match, sf::RenderWindow& window, BongoTre
         window.draw(Box);
         window.draw(ResultBox);
         printText("Back", true, 44, 50, &window, 18, false, true);
-        printText(to_string(btree.query(input_match, 23)), true, 398, 430, &window, 18, false, true);
+        printText(prob, true, 398, 430, &window, 18, false, true);
         window.display();
     }
 
