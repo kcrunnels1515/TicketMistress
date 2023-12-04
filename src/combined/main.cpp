@@ -11,23 +11,25 @@
 #include "BongoTree.hpp"
 #include "Ticket.hpp"
 #include "IdiotCopRectifier.hpp"
+#include "BongoHashMap.h"
 
 Year interpret_year(std::string year);
 
 int main(int argc,char* argv[]) {
-//  if (argc < 2) {
-//    std::cout << "Input: ./server [csv file]" << std::endl;
-//    return -1;
-//  }
-//  std::ifstream file(argv[1]);
-//  if(!file.is_open()){
-//     std::cout << "File not found" << std::endl;
-//     return -1;
-//  }
+  if (argc < 2) {
+    std::cout << "Input: ./server [csv file]" << std::endl;
+    return -1;
+  }
+  std::ifstream file(argv[1]);
+  if(!file.is_open()){
+     std::cout << "File not found" << std::endl;
+     return -1;
+  }
 
-  string temp = "../TicketMistress/test/useful_col_200k.csv";
+  //string temp = "../TicketMistress/test/useful_col_200k.csv";
 
   BongoTree ds_1;
+  BongoHashMap ds_2;
   //LoadingWindow loading_window;
   //loading_window.start(ds_1, argv[2]);
   std::map<std::string,Make> makes_map;
@@ -39,7 +41,7 @@ int main(int argc,char* argv[]) {
   std::map<std::string,State> state_map;
   state_names(state_map);
 
-  io::CSVReader<5> in(temp);
+  io::CSVReader<5> in(argv[1]);
   in.read_header(io::ignore_extra_column, "reg_state","v_body_type","v_make","color","year");
   std::string reg_state, v_body_type, v_make, color, year;
   std::cout << "Building database..." << std::endl;
@@ -67,10 +69,11 @@ int main(int argc,char* argv[]) {
       }
       temp->_year = interpret_year(year);
       ds_1.insert(temp);
+      ds_2.addCase(*temp);
   }
   std::cout << "Finished!" << std::endl;
-  Window test = Window();
-  test.start(ds_1);
+  //Window test = Window();
+  //test.start(ds_1);
 
   return 0;
 }

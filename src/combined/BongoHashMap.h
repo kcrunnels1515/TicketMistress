@@ -13,19 +13,18 @@ using namespace std;
 class BongoHashMap {
 private:
     int numStates = 50, numMakes = 49, numModels = 23, numColors = 18;
-    unordered_map<int, vector<Ticket*>> hashArray;
+    vector<vector<Ticket*>> hashArray;
     int capacity;
     int size;
     float maxLoadFactor = 0.75f;
 
 public:
     BongoHashMap();
-    void addCase(State state, Make make, Model model, Color color, int year);
-    vector<vector<string>> getCase(State state, Make make, Model model, Color color, Year year);
-    vector<vector<string>> getCaseInt(int state, int make, int model, int color, int year);
-    vector<vector<string>> getAllCases(State state, Make make, Model model, Color color, Year year);
-    int hashFunction(State state, Make make, Model model, Color color, int year);
-    int hashFunctionInt(int state, int make, int model, int color, int year);
+    void addCase(Ticket *input_ticket);
+    vector<Ticket*> getCase(Ticket input_ticket);
+    vector<Ticket*> getAllCases(Ticket input_ticket, unsigned char indep_vars);
+    pair<float, vector<Ticket*>> getStats(Ticket input_ticket, unsigned char indep_vars);
+    int hashFunction(Ticket input_ticket);
     int sizeOfMap();
     bool isEmpty();
     void resizeArr();
