@@ -6,10 +6,10 @@
 all: clean build-client build-server
 
 build-client:
-	g++ -Werror -Wuninitialized -o ./build/client ./src/client/*.cpp -lsfml-graphics -lsfml-window -lsfml-system
+	g++ -Wuninitialized -o ./build/client ./src/client/*.cpp -lsfml-graphics -lsfml-window -lsfml-system
 
 build-server:
-	g++ -g -Werror -Wuninitialized -o ./build/server ./src/server/*.cpp
+	g++ -g -Wuninitialized -o ./build/server ./src/server/*.cpp
 
 clean:
 	rm -f ./build/*
