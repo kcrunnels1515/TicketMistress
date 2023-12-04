@@ -592,19 +592,19 @@ std::vector<string> Window::start(BongoTree& btree){
         };
 
 
-        if(!state_not_varied) {
+        if( state_not_varied) {
             printText("X", false, 635, 135, &window, 25, false, true);
         }
-        if(!make_not_varied) {
+        if( make_not_varied) {
             printText("X", false, 635, 210, &window, 25, false, true);
         }
-        if(!model_not_varied) {
+        if( model_not_varied) {
             printText("X", false, 635, 285, &window, 25, false, true);
         }
-        if(!color_not_varied) {
+        if( color_not_varied) {
             printText("X", false, 635, 360, &window, 25, false, true);
         }
-        if(!year_not_varied) {
+        if( year_not_varied) {
             printText("X", false, 635, 435,  &window, 25, false, true);
         }
 
