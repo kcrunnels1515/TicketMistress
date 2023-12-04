@@ -402,9 +402,16 @@ std::vector<string> Window::start(BongoTree& btree){
                         year += to_string(num);
                     }
                     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
-                        selected = false;
-                        yearSelection = false;
-                        infoType = -1;
+                        if(std::stoi(year) < 1950 || std::stoi(year) > 2023){
+                            year = "";
+                        }
+                        else if(std::stoi(year) > 1930 && std::stoi(year) < 2024){
+                            selected = false;
+                            yearSelection = false;
+                            infoType = -1;
+                        }
+
+
                     }
                 }
 
