@@ -15,15 +15,17 @@
 Year interpret_year(std::string year);
 
 int main(int argc,char* argv[]) {
-  if (argc < 2) {
-    std::cout << "Input: ./server [csv file]" << std::endl;
-    return -1;
-  }
-  std::ifstream file(argv[1]);
-  if(!file.is_open()){
-     std::cout << "File not found" << std::endl;
-     return -1;
-  }
+//  if (argc < 2) {
+//    std::cout << "Input: ./server [csv file]" << std::endl;
+//    return -1;
+//  }
+//  std::ifstream file(argv[1]);
+//  if(!file.is_open()){
+//     std::cout << "File not found" << std::endl;
+//     return -1;
+//  }
+
+  string temp = "../TicketMistress/test/useful_col_200k.csv";
 
   BongoTree ds_1;
   //LoadingWindow loading_window;
@@ -37,7 +39,7 @@ int main(int argc,char* argv[]) {
   std::map<std::string,State> state_map;
   state_names(state_map);
 
-  io::CSVReader<5> in(argv[1]);
+  io::CSVReader<5> in(temp);
   in.read_header(io::ignore_extra_column, "reg_state","v_body_type","v_make","color","year");
   std::string reg_state, v_body_type, v_make, color, year;
   std::cout << "Building database..." << std::endl;
