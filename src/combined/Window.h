@@ -20,11 +20,9 @@ public:
     void printText(string txt, bool u, float x, float y, sf::RenderWindow *window, int f_size, bool w, bool bold);
     vector<string> start(BongoTree& btree);
     void SecondScreen(Ticket input_match, sf::RenderWindow& window, BongoTree& btree, unsigned char indep_vars);
+    bool pickScreen();
 };
 
-class LoadingWindow : public Window{
-public:
-    void start(BongoTree& btree, string filename);
-};
+
 
 Year interpret_year(std::string year);

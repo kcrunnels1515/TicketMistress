@@ -50,7 +50,9 @@ Window::Window() {
 }
 
 std::vector<string> Window::start(BongoTree& btree){
-
+    bool DS = pickScreen();
+    //true for tree
+    //false for hashmap
     std::vector<std::pair<State, std::string>> statesList = {
     {NOWHERE, ""}, {AL, "Alabama"}, {AK, "Alaska"}, {AZ, "Arizona"}, {AR, "Arkansas"}, {CA, "California"}, {CO, "Colorado"}, {CT, "Connecticut"}, {DE, "Delaware"},
     {FL, "Florida"}, {GA, "Georgia"}, {HI, "Hawaii"}, {ID, "Idaho"}, {IL, "Illinois"}, {IN, "Indiana"}, {IA, "Iowa"}, {KS, "Kansas"}, {KY, "Kentucky"},
@@ -429,34 +431,31 @@ std::vector<string> Window::start(BongoTree& btree){
             }
 
             if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-
+                //make_not_varied +state_not_varied +model_not_varied+year_not_varied+color_not_varied;
                 auto position = sf::Mouse::getPosition(window);
                 listIndex = 0;
                 if(submitBox.getGlobalBounds().contains(position.x,position.y)){
-                    infoVec[0] = name;
-                    infoVec[1] = make;
-                    infoVec[2] = model;
-                    infoVec[3] = color;
-                    infoVec[4] = year;
-                    try {
-                        Ticket temp = Ticket(state_var,make_var,color_var,model_var,std::stoi(year));
-                        int blanks = 0;
+                    int blanks = 0;
                         for(auto item : infoVec){
                             if(item == ""){
                                 blanks ++;
                             }
 
                         }
-                        if(blanks > 0){
+                        if(blanks > 0 || (make_not_varied +state_not_varied +model_not_varied+year_not_varied+color_not_varied == 0)){
 
                         }
                         else{
+                            infoVec[0] = name;
+                            infoVec[1] = make;
+                            infoVec[2] = model;
+                            infoVec[3] = color;
+                            infoVec[4] = year;
+                            Ticket temp = Ticket(state_var,make_var,color_var,model_var,std::stoi(year));
+
                             unsigned char indep_vars = (state_not_varied << 4) | (make_not_varied << 3) | (model_not_varied << 2 ) | (color_not_varied << 1) | year_not_varied;
                             SecondScreen(temp, window, btree, indep_vars);
                         }
-                    } catch (std::invalid_argument) {
-
-                    }
 
                 }
                 if(StateBox.getGlobalBounds().contains(position.x, position.y)){
@@ -525,32 +524,36 @@ std::vector<string> Window::start(BongoTree& btree){
                 // in any of the text rectangles
                 //listIndex = 0;
             }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && event.type == sf::Event::KeyPressed) {
-                infoVec[0] = name;
-                infoVec[1] = make;
-                infoVec[2] = model;
-                infoVec[3] = color;
-                infoVec[4] = year;
-                try {
-                        Ticket temp = Ticket(state_var,make_var,color_var,model_var,std::stoi(year));
-                        int blanks = 0;
-                        for(auto item : infoVec){
-                            if(item == ""){
-                                blanks ++;
-                            }
-
-                        }
-                        if(blanks > 0){
-
-                        }
-                        else{
-                            unsigned char indep_vars = (state_not_varied << 4) | (make_not_varied << 3) | (model_not_varied << 2 ) | (color_not_varied << 1) | year_not_varied;
-                            SecondScreen(temp, window, btree, indep_vars);
-                        }
-                    } catch (std::invalid_argument) {
-
-                    }
-            }
+//            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && event.type == sf::Event::KeyPressed) {
+//                if (make_not_varied +state_not_varied +model_not_varied+year_not_varied+color_not_varied == 0){
+//
+//                }
+//                else{
+//                    int blanks = 0;
+//                    for(auto item : infoVec){
+//                        if(item == ""){
+//                            blanks ++;
+//                        }
+//                    }
+//
+//                    if(blanks > 0){}
+//
+//                    else{
+//                        infoVec[0] = name;
+//                        infoVec[1] = make;
+//                        infoVec[2] = model;
+//                        infoVec[3] = color;
+//                        infoVec[4] = year;
+//
+//                        Ticket temp = Ticket(state_var,make_var,color_var,model_var,std::stoi(year));
+//
+//                        unsigned char indep_vars = (state_not_varied << 4) | (make_not_varied << 3) | (model_not_varied << 2 ) | (color_not_varied << 1) | year_not_varied;
+//                        SecondScreen(temp, window, btree, indep_vars);
+//                    }
+//                }
+//
+//
+//            }
         }
 
         window.clear(sf::Color::White);
@@ -791,6 +794,54 @@ void Window::SecondScreen(Ticket input_match, sf::RenderWindow& window, BongoTre
         window.display();
     }
 
+}
+
+bool Window::pickScreen() {
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Ticket Mistress", sf::Style::Close);
+    window.setFramerateLimit(60);
+    string temp = "BongoTree!";
+    string temp2 = "BongoHashMap!";
+    string intro = "Please pick the data structure you would like to use";
+    sf::Texture texture;
+    texture.loadFromFile("../TicketMistress/src/lib/tree.jpg");
+    sf::Sprite sprite;
+    sprite.setTexture(texture);
+    sprite.setPosition(100, 200);
+    sf::Texture texture2;
+    texture2.loadFromFile("../TicketMistress/src/lib/map.jpg");
+    sf::Sprite sprite2;
+    sprite2.setTexture(texture2);
+    sprite2.setPosition(460, 200);
+    //sprite.scale(3,3);
+    string returned;
+    while (window.isOpen()){
+
+        sf::Event event;
+        while (window.pollEvent(event)){
+            if(event.type == sf::Event::Closed){
+                window.close();
+            }
+            if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+                auto position = sf::Mouse::getPosition(window);
+                if(sprite.getGlobalBounds().contains(position.x,position.y)){
+                    return true;
+                }
+                else if(sprite2.getGlobalBounds().contains(position.x,position.y)){
+                    return false;
+                }
+            }
+
+        }
+        window.clear(sf::Color::Blue);
+        window.draw(sprite);
+        window.draw(sprite2);
+        printText(temp, true, 200, 150, &window, 22, true, true);
+        printText(temp2, true, 600, 150, &window, 22, true, true);
+        printText(intro, false, 400, 100, &window, 24, false, true);
+
+        window.display();
+    }
 };
+
 
 
