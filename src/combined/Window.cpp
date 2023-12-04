@@ -134,11 +134,11 @@ std::vector<string> Window::start(BongoTree& btree){
     bool modelSelection = false;
     bool colorSelection = false;
     bool yearSelection = false;
-    bool state_not_varied = true;
-    bool make_not_varied = true;
-    bool model_not_varied = true;
-    bool color_not_varied = true;
-    bool year_not_varied = true;
+    bool state_not_varied = false;
+    bool make_not_varied = false;
+    bool model_not_varied = false;
+    bool color_not_varied = false;
+    bool year_not_varied = false;
     sf::RenderWindow window(sf::VideoMode(32*width, 32*height+100), "Ticket Mistress", sf::Style::Close);
     window.setFramerateLimit(60);
     sf::RectangleShape bkgd = setRectangle(sf::Vector2f(800,600),0,0,0,0, sf::Color::White);

@@ -43,68 +43,91 @@ void BongoTree::sizes() {
     }
   }
 
-float BongoTree::query(Ticket input_match, unsigned char dep_vars) {
+float BongoTree::query(Ticket input_match, unsigned char indep_vars) {
     // first 5 chars mark state, model, color, make, year
     // complement of
 
     // intersect fn intersect()
-    std::set<Ticket*> dep_var_set;
-    std::set<Ticket*> free_vars_all;
-    std::set<Ticket*> free_vars_sel;
+    std::set<Ticket*> numerator_set;  // this should contain the intersections
+                                      // of all bongotree sets the correspond
+                                      // to inputted values
+    std::set<Ticket*> denominator_set; // this should contain the intersection between
+                                      // the inputted value sets, and a set containing
+                                      // the values of the free variables
 
-    if ((dep_vars & 16) == 16) {
-      dep_var_set = _states[input_match._state];
-    } else {
+    numerator_set = _states[input_match._state];
+    numerator_set = intersect(numerator_set, _models[input_match._model]);
+    numerator_set = intersect(numerator_set, _colors[input_match._color]);
+    numerator_set = intersect(numerator_set, _makes[input_match._make]);
+    numerator_set = intersect(numerator_set, _years[input_match._year]);
+
+
+    // STATES
+    if ((indep_vars & 16) == 16) {
       for (auto it = _states.begin(); it != _states.end(); ++it) {
-        free_vars_all.insert(it->second.begin(), it->second.end());
-      }
-    }
-    //std::cout << "dep_var_set_size: " << dep_var_set.size() << std::endl;
-    free_vars_sel = _states[input_match._state];
-
-    if ((dep_vars & 8) == 8) {
-      if (dep_var_set.empty()) dep_var_set = _models[input_match._model];
-      else {
-        dep_var_set = intersect(dep_var_set, _models[input_match._model]);
+        denominator_set.insert(it->second.begin(), it->second.end());
       }
     } else {
-      for (auto it = _models.begin(); it != _models.end(); ++it) {
-        free_vars_all.insert(it->second.begin(), it->second.end());
-      }
+      denominator_set = _states[input_match._state];
     }
 
-    free_vars_sel = intersect(free_vars_sel, _models[input_match._model]);
-
-    if ((dep_vars & 4) == 4) {
-      if (dep_var_set.empty()) dep_var_set = _colors[input_match._color];
+    // MODELS
+    if ((indep_vars & 8) == 8) {
+      if (denominator_set.empty()) {
+        for (auto it = _models.begin(); it != _models.end(); ++it) {
+          denominator_set.insert(it->second.begin(), it->second.end());
+        }
+      }
       else {
-        dep_var_set = intersect(dep_var_set, _colors[input_match._color]);
+        std::set<Ticket*> temp;
+        for (auto it = _models.begin(); it != _models.end(); ++it) {
+          temp.insert(it->second.begin(), it->second.end());
+        }
       }
     } else {
-      for (auto it = _colors.begin(); it != _colors.end(); ++it) {
-        free_vars_all.insert(it->second.begin(), it->second.end());
-      }
+      denominator_set = intersect(denominator_set, _models[input_match._model]);
     }
 
-    free_vars_sel = intersect(free_vars_sel, _colors[input_match._color]);
-
-    if ((dep_vars & 2) == 2) {
-      if (dep_var_set.empty()) dep_var_set = _makes[input_match._make];
+    // COLORS
+    if ((indep_vars & 4) == 4) {
+      if (denominator_set.empty()) {
+        for (auto it = _colors.begin(); it != _colors.end(); ++it) {
+          denominator_set.insert(it->second.begin(), it->second.end());
+        }
+      }
       else {
-        dep_var_set = intersect(dep_var_set, _makes[input_match._make]);
+        std::set<Ticket*> temp;
+        for (auto it = _colors.begin(); it != _colors.end(); ++it) {
+          temp.insert(it->second.begin(), it->second.end());
+        }
       }
     } else {
-      for (auto it = _makes.begin(); it != _makes.end(); ++it) {
-        free_vars_all.insert(it->second.begin(), it->second.end());
+      denominator_set = intersect(denominator_set, _colors[input_match._color]);
+    }
+
+    // MAKES
+    if ((indep_vars & 2) == 2) {
+      if (denominator_set.empty()) {
+        for (auto it = _makes.begin(); it != _makes.end(); ++it) {
+          denominator_set.insert(it->second.begin(), it->second.end());
+        }
       }
+      else {
+        std::set<Ticket*> temp;
+        for (auto it = _models.begin(); it != _models.end(); ++it) {
+          temp.insert(it->second.begin(), it->second.end());
+        }
+      }
+    } else {
+      denominator_set = intersect(denominator_set, _models[input_match._model]);
     }
 
     free_vars_sel = intersect(free_vars_sel, _makes[input_match._make]);
 
-    if ((dep_vars & 1) == 1) {
+    // YEARS
+    if ((indep_vars & 1) == 1) {
       if (dep_var_set.empty()) dep_var_set = _years[input_match._year];
       else {
-        dep_var_set = intersect(dep_var_set, _years[input_match._year]);
       }
     } else {
       for (auto it = _years.begin(); it != _years.end(); ++it) {
