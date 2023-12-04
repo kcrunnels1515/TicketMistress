@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <list>
+#include <unordered_map>
 #include "Ticket.hpp"
 
 using namespace std;
@@ -11,22 +13,20 @@ using namespace std;
 class BongoHashMap {
 private:
     int numStates = 50, numMakes = 49, numModels = 23, numColors = 18;
-    Ticket** hashArray;
+    unordered_map<int, vector<Ticket*>> hashArray;
     int capacity;
     int size;
-    Ticket* temp;
-    float maxLoadFactor = 0.05f;
+    float maxLoadFactor = 0.5f;
 
 public:
     BongoHashMap();
-    ~BongoHashMap();
-
     void addCase(State state, Make make, Model model, Color color, int year);
-    vector<int> getCase();
+    vector<vector<string>> getCase(State state, Make make, Model model, Color color, Year year);
     vector<vector<int>> getAllCases();
     int hashFunction(State state, Make make, Model model, Color color, int year);
     int sizeOfMap();
     bool isEmpty();
+    void resizeArr();
 
 };
 

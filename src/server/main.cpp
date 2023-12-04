@@ -107,6 +107,26 @@ Time interpret_time(std::string time);
 int main(){
     std::cout << "hello" << "\n";
     BongoHashMap hashMap = BongoHashMap();
-    hashMap.addCase(FL, BENZ, SUBN, BLUE, 2002, 1234);
+    hashMap.addCase(FL, BENZ, SUBN, BLUE, 2002);
+    hashMap.addCase(AK, HONDA, FWD, GREEN, 2003);
+    hashMap.addCase(AL, TOYOTA, SUBN, YELLOW, 2004);
+    hashMap.addCase(AL, TOYOTA, SUBN, YELLOW, 2004);
+    hashMap.addCase(AL, TOYOTA, SUBN, YELLOW, 2004);
+    hashMap.addCase(AL, TOYOTA, SUBN, YELLOW, 2004);
+    hashMap.addCase(AL, TOYOTA, SUBN, YELLOW, 2004);
+    hashMap.addCase(AL, TOYOTA, SUBN, YELLOW, 2004);
+    hashMap.addCase(MA, BENZ, SUBN, TAN, 2005);
+//    hashMap.getAllCases();
+
+    vector<vector<string>> output = hashMap.getCase(AL, TOYOTA, SUBN, YELLOW, 2004);
+    cout << "\n" << "\n";
+    cout << "output:" << "\n";
+    for(int i = 0; i < output.size(); i++){
+        for(int j = 0; j < output[i].size(); j++){
+            cout << output[i][j] << " ";
+        }
+        cout << "\n";
+    }
+//    cout << "i finished the code";
     return 0;
 }

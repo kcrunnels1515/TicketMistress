@@ -63,6 +63,7 @@ struct Ticket {
   Color _color;
   Make _make;
   Year _year;
+  Time _time;
   Ticket() {}
   Ticket(State state, Make make, Color color, Model model, Year year)
     : _state(state), _model(model), _color(color), _make(make), _year(year) {}
