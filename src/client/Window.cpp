@@ -645,18 +645,9 @@ void Window::SecondScreen(vector<string>& infoVec, sf::RenderWindow& window) {
     }
 
 }
-//
-//void Window::loadingScreen(sf::RenderWindow &window) {
-//    while (window.isOpen()){
-//        window.clear(sf::Color::White);
-//        sf::Event event;
-//        printText("Welcome. Please wait while the data is loading!", true, 400, 100, &window,18 ,false, true);
-//        while(window.pollEvent(event)){
-//
-//        }
-//        window.display();
-//    }
-//};
+
+
+
 void LoadingWindow::start() {
     sf::RenderWindow window(sf::VideoMode(800, 600), "Loading...", sf::Style::Close);
     window.setFramerateLimit(60);

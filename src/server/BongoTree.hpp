@@ -105,7 +105,7 @@ class BongoTree {
       }
     }
 
-    free_vars_sel = intersect(free_vars_sel, _models[model]);
+    free_vars_sel = intersect(free_vars_sel, _colors[color]);
 
     if ((dep_vars & 2) == 2) {
       if (dep_var_set.empty()) dep_var_set = _makes[make];
@@ -132,6 +132,7 @@ class BongoTree {
     }
     free_vars_sel = intersect(free_vars_sel, _years[year]);
     float dep_var_size = (float) intersect(dep_var_set, free_vars_sel).size();
+    //potential problem
     float everything_else = (float) intersect(free_vars_all,free_vars_sel).size();
     return dep_var_size / everything_else;
   }

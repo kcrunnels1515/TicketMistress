@@ -5,6 +5,8 @@
 #include <fstream>
 #include "Ticket.hpp"
 #include "BongoTree.hpp"
+#include "../lib/csv.hpp"
+#include "IdiotCopRectifier.hpp"
 using namespace std;
 
 using namespace std;
@@ -19,3 +21,10 @@ public:
     vector<string> start(BongoTree& btree);
     void SecondScreen(Ticket input_match, sf::RenderWindow& window, BongoTree& btree);
 };
+
+class LoadingWindow : public Window{
+public:
+    void start(BongoTree& btree, string filename);
+};
+
+Year interpret_year(std::string year);
