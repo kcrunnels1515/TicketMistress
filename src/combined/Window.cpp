@@ -674,7 +674,8 @@ void Window::SecondScreen(Ticket input_match, sf::RenderWindow& window, BongoTre
     vector<vector<string>> data;
     data = {{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"}};
     int curr = 0;
-    string prob = to_string(btree.query(input_match, indep_vars));
+    std::pair<float,std::set<Ticket*>> result = btree.query(input_match, indep_vars);
+    string prob = to_string(result.first);
     int scrollVal = 0;
     sf::RectangleShape Box;//= sf::Rect(400, 350, 100, 50);
     Box.setPosition(20, 40);

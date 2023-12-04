@@ -43,7 +43,7 @@ void BongoTree::sizes() {
     }
   }
 
-float BongoTree::query(Ticket input_match, unsigned char indep_vars) {
+std::pair<float,std::set<Ticket*>> BongoTree::query(Ticket input_match, unsigned char indep_vars) {
     // first 5 chars mark state, model, color, make, year
     // complement of
 
@@ -139,5 +139,5 @@ float BongoTree::query(Ticket input_match, unsigned char indep_vars) {
       denominator_set = intersect(denominator_set, _years[input_match._year]);
     }
 
-    return numerator_set.size() / denominator_set.size();
+    return make_pair(((float) numerator_set.size() / (float) denominator_set.size()), numerator_set);
   }
