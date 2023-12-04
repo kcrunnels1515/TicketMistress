@@ -718,15 +718,13 @@ void LoadingWindow::start(BongoTree& btree, string filename) {
     std::string reg_state, v_body_type, v_make, color, year;
     while(in.read_row(reg_state, v_body_type, v_make, color, year) && window.isOpen()){
         sf::Event event;
-        while(window.pollEvent(event)){
-            if (event.type == sf::Event::Closed) {
+        window.pollEvent(event);
+        if (event.type == sf::Event::Closed) {
                 window.close();
-            }
         }
         window.clear(sf::Color::White);
         window.draw(sprite);
         printText("Welcome. Please wait while the data is loading!", true, 400, 100, &window,18 ,false, true);
-
         window.display();
         Ticket* temp = new Ticket;
         if (auto search = state_map.find(reg_state); search != state_map.end()) {
