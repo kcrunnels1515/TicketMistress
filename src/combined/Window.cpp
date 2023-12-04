@@ -716,7 +716,7 @@ void LoadingWindow::start(BongoTree& btree, string filename) {
     io::CSVReader<5> in(filename);
     in.read_header(io::ignore_extra_column, "reg_state","v_body_type","v_make","color","year");
     std::string reg_state, v_body_type, v_make, color, year;
-    while(in.read_row(reg_state, v_body_type, v_make, color, year)){
+    while(in.read_row(reg_state, v_body_type, v_make, color, year) && window.isOpen()){
         sf::Event event;
         while(window.pollEvent(event)){
             if (event.type == sf::Event::Closed) {
@@ -752,8 +752,7 @@ void LoadingWindow::start(BongoTree& btree, string filename) {
         temp->_year = interpret_year(year);
         btree.insert(temp);
     }
-    while (window.isOpen()){
-    }
+    window.close();
 }
 
 Year interpret_year(std::string year) {

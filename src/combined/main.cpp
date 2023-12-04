@@ -33,7 +33,6 @@ int main(int argc,char* argv[]) {
   LoadingWindow loading_window;
   loading_window.start(ds_1, argv[2]);
 
-
   Window test = Window();
   test.start(ds_1);
 
