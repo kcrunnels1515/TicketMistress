@@ -3,13 +3,10 @@
 
 .PHONY: clean
 
-all: clean build-client build-server
+all: clean build-tm
 
-build-client:
-	g++ -Wuninitialized -o ./build/client ./src/client/*.cpp -lsfml-graphics -lsfml-window -lsfml-system
-
-build-server:
-	g++ -g -Wuninitialized -o ./build/server ./src/server/*.cpp
+build-tm:
+	g++ -Wuninitialized -o ./build/ticketmistress ./src/combined/*.cpp -lsfml-graphics -lsfml-window -lsfml-system
 
 clean:
 	rm -f ./build/*
