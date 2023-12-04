@@ -114,28 +114,30 @@ float BongoTree::query(Ticket input_match, unsigned char indep_vars) {
       }
       else {
         std::set<Ticket*> temp;
-        for (auto it = _models.begin(); it != _models.end(); ++it) {
+        for (auto it = _makes.begin(); it != _makes.end(); ++it) {
           temp.insert(it->second.begin(), it->second.end());
         }
       }
     } else {
-      denominator_set = intersect(denominator_set, _models[input_match._model]);
+      denominator_set = intersect(denominator_set, _makes[input_match._make]);
     }
-
-    free_vars_sel = intersect(free_vars_sel, _makes[input_match._make]);
 
     // YEARS
     if ((indep_vars & 1) == 1) {
-      if (dep_var_set.empty()) dep_var_set = _years[input_match._year];
+      if (denominator_set.empty()) {
+        for (auto it = _years.begin(); it != _years.end(); ++it) {
+          denominator_set.insert(it->second.begin(), it->second.end());
+        }
+      }
       else {
+        std::set<Ticket*> temp;
+        for (auto it = _years.begin(); it != _years.end(); ++it) {
+          temp.insert(it->second.begin(), it->second.end());
+        }
       }
     } else {
-      for (auto it = _years.begin(); it != _years.end(); ++it) {
-        free_vars_all.insert(it->second.begin(), it->second.end());
-      }
+      denominator_set = intersect(denominator_set, _years[input_match._year]);
     }
-    free_vars_sel = intersect(free_vars_sel, _years[input_match._year]);
-    float dep_var_size = (float) intersect(dep_var_set, free_vars_sel).size();
-    float everything_else = (float) intersect(free_vars_all,free_vars_sel).size();
-    return dep_var_size / everything_else;
+
+    return numerator_set.size() / denominator_set.size();
   }
