@@ -16,4 +16,10 @@ public:
     void printText(string txt, bool u, float x, float y, sf::RenderWindow *window, int f_size, bool w, bool bold);
     vector<string> start();
     void SecondScreen(vector<string>& infoVec, sf::RenderWindow& window);
+    void loadingScreen(sf::RenderWindow& window);
+};
+
+class LoadingWindow : public Window{
+public:
+    void start();
 };
