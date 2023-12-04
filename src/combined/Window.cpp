@@ -686,7 +686,7 @@ void Window::SecondScreen(Ticket input_match, sf::RenderWindow& window, BongoTre
             }
         }
         window.draw(Box);
-        printText(to_string(btree.query(input_match, 3)), true, 44, 50, &window, 18, false, true);
+        printText(to_string(btree.query(input_match, 23)), true, 44, 50, &window, 18, false, true);
         window.display();
     }
 
@@ -749,6 +749,7 @@ void LoadingWindow::start(BongoTree& btree, string filename) {
         }
         temp->_year = interpret_year(year);
         btree.insert(temp);
+        std::cout << "Inserted: " << temp->_state << std::endl;
     }
     window.close();
 }
