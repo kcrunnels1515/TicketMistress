@@ -118,12 +118,23 @@ int main(){
     hashMap.addCase(MA, BENZ, SUBN, TAN, 2005);
 //    hashMap.getAllCases();
 
+
     vector<vector<string>> output = hashMap.getCase(AL, TOYOTA, SUBN, YELLOW, 2004);
     cout << "\n" << "\n";
     cout << "output:" << "\n";
     for(int i = 0; i < output.size(); i++){
         for(int j = 0; j < output[i].size(); j++){
             cout << output[i][j] << " ";
+        }
+        cout << "\n";
+    }
+
+    vector<vector<string>> output2 = hashMap.getAllCases(AL, TOYOTA, SUBN, YELLOW, 2004);
+    cout << "\n" << "\n";
+    cout << "output:" << "\n";
+    for(int i = 0; i < output2.size(); i++){
+        for(int j = 0; j < output2[i].size(); j++){
+            cout << output2[i][j] << " ";
         }
         cout << "\n";
     }
