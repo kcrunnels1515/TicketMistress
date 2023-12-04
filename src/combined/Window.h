@@ -19,7 +19,7 @@ public:
     sf::RectangleShape setRectangle(sf::Vector2f s,float x, float y, float o_x, float o_y, sf::Color color);
     void printText(string txt, bool u, float x, float y, sf::RenderWindow *window, int f_size, bool w, bool bold);
     vector<string> start(BongoTree& btree);
-    void SecondScreen(Ticket input_match, sf::RenderWindow& window, BongoTree& btree);
+    void SecondScreen(Ticket input_match, sf::RenderWindow& window, BongoTree& btree, unsigned char indep_vars);
 };
 
 class LoadingWindow : public Window{

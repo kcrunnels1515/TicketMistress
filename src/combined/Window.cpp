@@ -444,7 +444,8 @@ std::vector<string> Window::start(BongoTree& btree){
 
                         }
                         else{
-                            SecondScreen(temp, window, btree);
+                            unsigned char indep_vars = (state_not_varied << 4) | (make_not_varied << 3) | (model_not_varied << 2 ) | (color_not_varied << 1) | year_not_varied;
+                            SecondScreen(temp, window, btree, indep_vars);
                         }
                     } catch (std::invalid_argument) {
 
@@ -536,7 +537,8 @@ std::vector<string> Window::start(BongoTree& btree){
 
                         }
                         else{
-                            SecondScreen(temp, window, btree);
+                            unsigned char indep_vars = (state_not_varied << 4) | (make_not_varied << 3) | (model_not_varied << 2 ) | (color_not_varied << 1) | year_not_varied;
+                            SecondScreen(temp, window, btree, indep_vars);
                         }
                     } catch (std::invalid_argument) {
 
@@ -661,11 +663,11 @@ std::vector<string> Window::start(BongoTree& btree){
 }
 
 
-void Window::SecondScreen(Ticket input_match, sf::RenderWindow& window, BongoTree& btree) {
+void Window::SecondScreen(Ticket input_match, sf::RenderWindow& window, BongoTree& btree, unsigned char indep_vars) {
     vector<vector<string>> data;
     data = {{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"}};
     int curr = 0;
-    string prob = to_string(btree.query(input_match, 23));
+    string prob = to_string(btree.query(input_match, indep_vars));
     int scrollVal = 0;
     sf::RectangleShape Box;//= sf::Rect(400, 350, 100, 50);
     Box.setPosition(20, 40);
