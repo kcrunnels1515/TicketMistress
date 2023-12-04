@@ -6,7 +6,7 @@
 all: clean build-tm
 
 build-tm:
-	g++ -Wuninitialized -o ./build/ticketmistress ./src/combined/*.cpp -lsfml-graphics -lsfml-window -lsfml-system
+	g++ -g -Wuninitialized -o ./build/ticketmistress ./src/combined/*.cpp -lsfml-graphics -lsfml-window -lsfml-system
 
 clean:
 	rm -f ./build/*

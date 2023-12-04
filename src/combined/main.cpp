@@ -12,6 +12,8 @@
 #include "Ticket.hpp"
 #include "IdiotCopRectifier.hpp"
 
+Year interpret_year(std::string year);
+
 int main(int argc,char* argv[]) {
   if (argc < 3) {
     std::cout << "Input: ./server [port] [csv file]" << std::endl;
@@ -77,4 +79,16 @@ int main(int argc,char* argv[]) {
   return 0;
 }
 
-
+Year interpret_year(std::string year) {
+    if (year == "") return 0;
+    else {
+        Year y = 0;
+        try {
+            y = std::stoi(year);
+        } catch (std::invalid_argument) {
+            return 0;
+        }
+        if (y >= 1922 && y <= 2023) return y;
+        else return 0;
+    }
+}

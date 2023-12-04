@@ -183,7 +183,6 @@ std::vector<string> Window::start(BongoTree& btree){
     Color color_var;
     Model model_var;
     Make make_var;
-    Year year_var;
 
     sf::Font font;
     if (!font.loadFromFile("../TicketMistress/src/client/font.ttf")){
@@ -366,7 +365,6 @@ std::vector<string> Window::start(BongoTree& btree){
                     }
                     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
                         selected = false;
-                        year_var = std::stoi(year);
                         yearSelection = false;
                         infoType = -1;
                     }
@@ -395,7 +393,7 @@ std::vector<string> Window::start(BongoTree& btree){
                     infoVec[2] = model;
                     infoVec[3] = color;
                     infoVec[4] = year;
-                    Ticket temp = Ticket(state_var,make_var,color_var,model_var,year_var);
+                    Ticket temp = Ticket(state_var,make_var,color_var,model_var,std::stoi(year));
                     int blanks = 0;
                     for(auto item : infoVec){
                         if(item == ""){
@@ -473,7 +471,7 @@ std::vector<string> Window::start(BongoTree& btree){
                         blanks ++;
                     }
                 }
-                Ticket temp = Ticket(state_var,make_var,color_var,model_var,year_var);
+                Ticket temp = Ticket(state_var,make_var,color_var,model_var,std::stoi(year));
                 if(blanks > 3){
 
                 }
@@ -589,6 +587,12 @@ void Window::SecondScreen(Ticket input_match, sf::RenderWindow& window, BongoTre
     Box.setSize(sf::Vector2f(50, 50));
     Box.setOutlineColor(sf::Color::Black);
     Box.setOutlineThickness(5);
+    sf::RectangleShape ResultBox;//= sf::Rect(400, 350, 100, 50);
+    ResultBox.setPosition(330, 415);
+    ResultBox.setSize(sf::Vector2f(150, 50));
+    ResultBox.setOutlineColor(sf::Color::Black);
+    ResultBox.setOutlineThickness(5);
+
     while(window.isOpen()){
         window.clear(sf::Color::White);
         sf::Event event;
@@ -686,84 +690,12 @@ void Window::SecondScreen(Ticket input_match, sf::RenderWindow& window, BongoTre
             }
         }
         window.draw(Box);
-        printText(to_string(btree.query(input_match, 23)), true, 44, 50, &window, 18, false, true);
+        window.draw(ResultBox);
+        printText("Back", true, 44, 50, &window, 18, false, true);
+        printText(to_string(btree.query(input_match, 23)), true, 398, 430, &window, 18, false, true);
         window.display();
     }
 
 };
 
 
-void LoadingWindow::start(BongoTree& btree, string filename) {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Loading...", sf::Style::Close);
-    window.setFramerateLimit(60);
-    sf::Font font;
-
-    sf::Sprite sprite;
-    sf::Texture texture;
-    texture.loadFromFile("../TicketMistress/src/client/smileyface.jpg");
-    sprite.setTexture(texture);
-    sprite.setPosition(0,0);
-
-    std::map<std::string,Make> makes_map;
-    make_names(makes_map);
-    std::map<std::string,Model> model_map;
-    model_names(model_map);
-    std::map<std::string,Color> color_map;
-    colors_names(color_map);
-    std::map<std::string,State> state_map;
-    state_names(state_map);
-
-    io::CSVReader<5> in(filename);
-    in.read_header(io::ignore_extra_column, "reg_state","v_body_type","v_make","color","year");
-    std::string reg_state, v_body_type, v_make, color, year;
-    while(in.read_row(reg_state, v_body_type, v_make, color, year) && window.isOpen()){
-        sf::Event event;
-        window.pollEvent(event);
-        if (event.type == sf::Event::Closed) {
-                window.close();
-        }
-        window.clear(sf::Color::White);
-        window.draw(sprite);
-        printText("Welcome. Please wait while the data is loading!", true, 400, 100, &window,18 ,false, true);
-        window.display();
-        Ticket* temp = new Ticket;
-        if (auto search = state_map.find(reg_state); search != state_map.end()) {
-            temp->_state = search->second;
-        } else {
-            temp->_state = NOWHERE;
-        }
-        if (auto search = makes_map.find(v_make); search != makes_map.end()) {
-            temp->_make = search->second;
-        } else {
-            temp->_make = VEHICLE;
-        }
-        if (auto search = color_map.find(color); search != color_map.end()) {
-            temp->_color = search->second;
-        } else {
-            temp->_color = UNKNOWN;
-        }
-        if (auto search = model_map.find(v_body_type); search != model_map.end()) {
-            temp->_model = search->second;
-        } else {
-            temp->_model = DIM3;
-        }
-        temp->_year = interpret_year(year);
-        btree.insert(temp);
-        std::cout << "Inserted: " << temp->_state << std::endl;
-    }
-    window.close();
-}
-
-Year interpret_year(std::string year) {
-    if (year == "") return 0;
-    else {
-        Year y = 0;
-        try {
-            y = std::stoi(year);
-        } catch (std::invalid_argument) {
-            return 0;
-        }
-        if (y >= 1922 && y <= 2023) return y;
-        else return 0;
-    }
-}
