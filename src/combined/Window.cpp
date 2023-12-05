@@ -52,7 +52,7 @@ Window::Window() {
     {MT, "Montana"}, {NE, "Nebraska"}, {NV, "Nevada"}, {NH, "New Hampshire"}, {NJ, "New Jersey"}, {NM, "New Mexico"}, {NY, "New York"},
     {NC, "North Carolina"}, {ND, "North Dakota"}, {OH, "Ohio"}, {OK, "Oklahoma"}, {OR, "Oregon"}, {PA, "Pennsylvania"}, {RI, "Rhode Island"},
     {SC, "South Carolina"}, {SD, "South Dakota"}, {TN, "Tennessee"}, {TX, "Texas"}, {UT, "Utah"}, {VT, "Vermont"}, {VA, "Virginia"}, {WA, "Washington"},
-    {WV, "West Virginia"}, {WI, "Wisconsin"}, {WY, "Wyoming"}
+    {WV, "West Virginia"}, {WI, "Wisconsin"}, {WY, "Wyoming"}, {NOWHERE, "Unknown"}
     };
 
     makesList = {
@@ -60,7 +60,7 @@ Window::Window() {
         {HONDA,"Honda"}, {HYUND,"Hyundai"}, {NISSAN,"Nissan"}, {RAM,"RAM"}, {SUBARU,"Subaru"}, {TESLA,"Tesla"}, {TOYOTA,"Toyota"}, {VOLKS,"Volkswagon"}, {CHRYS,"Chrystler"}, {DODGE,"Dodge"},
         {FIAT,"Fiat"}, {GM,"General Motors"}, {ISUZU,"Isuzu"}, {CADDIE,"Cadilac"}, {INTERNATL,"International"}, {JAG,"JAGUAR"}, {KWORTH,"Kenworth"}, {LAMBO,"Lambourghini"}, {LEXUS,"Lexus"}, {LINCOLN,"Lincoln"},
         {ROVER,"Rover"}, {MACK,"Mack"}, {MASR,"Maserati"}, {MERC,"Mercury"}, {MINI,"Mini"}, {MITSU,"Mitsubishi"}, {PORSCE,"Porsce"}, {PONTIAC,"Pontiac"}, {SATURN,"Saturn"}, {SMART,"Smart"},
-        {SUZUKU,"Suzuku"}, {UD,"UD"}, {VOLVO,"Volvo"}, {WORKHORS,"Workhorse"}, {JEEP,"Jeep"}, {KIA,"Kia"}, {MAZDA,"Mazda"}
+        {SUZUKU,"Suzuku"}, {UD,"UD"}, {VOLVO,"Volvo"}, {WORKHORS,"Workhorse"}, {JEEP,"Jeep"}, {KIA,"Kia"}, {MAZDA,"Mazda"}, {VEHICLE, "Unknown"}
     };
 
     modelsList = {
@@ -86,6 +86,7 @@ Window::Window() {
         {FWD,"Four-Wheel Drive"},
         {TWD,"Two-Wheel Drive"},
         {CONV,"Convertable"},
+        {DIM3, "Unknown"}
     };
 
     colorsList = {
@@ -106,6 +107,7 @@ Window::Window() {
         {REDORANGE,"Red-Orange"},
         {SILVER,"Silver"},
         {TAN,"Tan"},
+        {UNKNOWN, "Unknown"}
     };
 }
 
