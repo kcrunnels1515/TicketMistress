@@ -69,11 +69,11 @@ int main(int argc,char* argv[]) {
       }
       temp->_year = interpret_year(year);
       ds_1.insert(temp);
-      ds_2.addCase(*temp);
+      ds_2.addCase(temp);
   }
   std::cout << "Finished!" << std::endl;
-  //Window test = Window();
-  //test.start(ds_1);
+  Window test = Window();
+  test.start(ds_1, ds_2);
 
   return 0;
 }

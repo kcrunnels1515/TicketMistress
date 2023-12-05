@@ -21,7 +21,7 @@ class BongoTree {
   BongoTree() {}
   void insert(Ticket* temp);
   void sizes();
-  std::pair<float,std::set<Ticket*>> query(Ticket input_match, unsigned char dep_vars);
+  std::pair<float,std::vector<Ticket*>> query(Ticket input_match, unsigned char dep_vars);
 };
 
 #endif

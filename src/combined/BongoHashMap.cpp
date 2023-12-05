@@ -14,7 +14,11 @@ void BongoHashMap::resizeArr(){
         for (Ticket* t : i)
         temp_arr.push_back(t);
     }
-
+    hashArray.clear();
+    hashArray.reserve(capacity);
+    for (Ticket* t : temp_arr) {
+        addCase(t);
+    }
 };
 
 void BongoHashMap::addCase(Ticket* input_ticket){
@@ -28,7 +32,7 @@ void BongoHashMap::addCase(Ticket* input_ticket){
     //std::cout << state << (int)make << model << color << "\n";
     int hashVal = hashFunction(*input_ticket);
     int index = hashVal % capacity;
-    std::cout << hashVal << " " << index;
+    //std::cout << hashVal << " " << index;
     hashArray[index].push_back(input_ticket);
     size++;
 };

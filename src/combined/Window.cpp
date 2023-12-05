@@ -49,7 +49,7 @@ Window::Window() {
 
 }
 
-std::vector<string> Window::start(BongoTree& btree){
+std::vector<string> Window::start(BongoTree& btree, BongoHashMap& hmap){
     bool DS = pickScreen();
     //true for tree
     //false for hashmap
@@ -436,6 +436,11 @@ std::vector<string> Window::start(BongoTree& btree){
                 listIndex = 0;
                 if(submitBox.getGlobalBounds().contains(position.x,position.y)){
                     int blanks = 0;
+                        infoVec[0] = name;
+                        infoVec[1] = make;
+                        infoVec[2] = model;
+                        infoVec[3] = color;
+                        infoVec[4] = year;
                         for(auto item : infoVec){
                             if(item == ""){
                                 blanks ++;
@@ -446,15 +451,9 @@ std::vector<string> Window::start(BongoTree& btree){
 
                         }
                         else{
-                            infoVec[0] = name;
-                            infoVec[1] = make;
-                            infoVec[2] = model;
-                            infoVec[3] = color;
-                            infoVec[4] = year;
                             Ticket temp = Ticket(state_var,make_var,color_var,model_var,std::stoi(year));
-
                             unsigned char indep_vars = (state_not_varied << 4) | (make_not_varied << 3) | (model_not_varied << 2 ) | (color_not_varied << 1) | year_not_varied;
-                            SecondScreen(temp, window, btree, indep_vars);
+                            SecondScreen(temp, window, btree, hmap, indep_vars, DS);
                         }
 
                 }
@@ -524,36 +523,34 @@ std::vector<string> Window::start(BongoTree& btree){
                 // in any of the text rectangles
                 //listIndex = 0;
             }
-//            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && event.type == sf::Event::KeyPressed) {
-//                if (make_not_varied +state_not_varied +model_not_varied+year_not_varied+color_not_varied == 0){
-//
-//                }
-//                else{
-//                    int blanks = 0;
-//                    for(auto item : infoVec){
-//                        if(item == ""){
-//                            blanks ++;
-//                        }
-//                    }
-//
-//                    if(blanks > 0){}
-//
-//                    else{
-//                        infoVec[0] = name;
-//                        infoVec[1] = make;
-//                        infoVec[2] = model;
-//                        infoVec[3] = color;
-//                        infoVec[4] = year;
-//
-//                        Ticket temp = Ticket(state_var,make_var,color_var,model_var,std::stoi(year));
-//
-//                        unsigned char indep_vars = (state_not_varied << 4) | (make_not_varied << 3) | (model_not_varied << 2 ) | (color_not_varied << 1) | year_not_varied;
-//                        SecondScreen(temp, window, btree, indep_vars);
-//                    }
-//                }
-//
-//
-//            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && event.type == sf::Event::KeyPressed) {
+                if (make_not_varied +state_not_varied +model_not_varied+year_not_varied+color_not_varied == 0){
+
+                }
+                else{
+                    int blanks = 0;
+                    infoVec[0] = name;
+                    infoVec[1] = make;
+                    infoVec[2] = model;
+                    infoVec[3] = color;
+                    infoVec[4] = year;
+                    for(auto item : infoVec){
+                        if(item == ""){
+                            blanks ++;
+                        }
+                    }
+
+                    if(blanks > 0){}
+
+                    else {
+                        Ticket temp = Ticket(state_var,make_var,color_var,model_var,std::stoi(year));
+                        unsigned char indep_vars = (state_not_varied << 4) | (make_not_varied << 3) | (model_not_varied << 2 ) | (color_not_varied << 1) | year_not_varied;
+                        SecondScreen(temp, window, btree, hmap, indep_vars, DS);
+                    }
+                }
+
+
+            }
         }
 
         window.clear(sf::Color::White);
@@ -673,11 +670,16 @@ std::vector<string> Window::start(BongoTree& btree){
 }
 
 
-void Window::SecondScreen(Ticket input_match, sf::RenderWindow& window, BongoTree& btree, unsigned char indep_vars) {
+void Window::SecondScreen(Ticket input_match, sf::RenderWindow& window, BongoTree& btree, BongoHashMap& hmap, unsigned char indep_vars, bool tree_or_map) {
     vector<vector<string>> data;
     data = {{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"}};
     int curr = 0;
-    std::pair<float,std::set<Ticket*>> result = btree.query(input_match, indep_vars);
+    std::pair<float,std::vector<Ticket*>> result;
+    if(tree_or_map) {
+        result = btree.query(input_match, indep_vars);
+    } else {
+        result = hmap.getStats(input_match, indep_vars);
+    }
     string prob = to_string(result.first);
     int scrollVal = 0;
     sf::RectangleShape Box;//= sf::Rect(400, 350, 100, 50);
@@ -841,6 +843,7 @@ bool Window::pickScreen() {
 
         window.display();
     }
+    return true;
 };
 
 
