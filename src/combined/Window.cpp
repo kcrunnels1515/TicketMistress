@@ -519,6 +519,30 @@ std::vector<string> Window::start(BongoTree& btree, BongoHashMap& hmap){
                     colorSelection = false;
                     yearSelection = false;
                 }
+                if(submitBox.getGlobalBounds().contains(position.x,position.y)){
+                    infoVec[0] = name;
+                    infoVec[1] = make;
+                    infoVec[2] = model;
+                    infoVec[3] = color;
+                    infoVec[4] = year;
+                    Ticket temp = Ticket(state_var,make_var,color_var,model_var,std::stoi(year));
+                    int blanks = 0;
+                    for(auto item : infoVec){
+                        if(item == ""){
+                            blanks ++;
+                        }
+
+                    }
+                    if(blanks > 0 || (make_not_varied +state_not_varied +model_not_varied+year_not_varied+color_not_varied) == 0){
+
+                    }
+                    else{
+                        unsigned char indep_vars = (state_not_varied << 4) | (make_not_varied << 3) | (model_not_varied << 2 ) | (color_not_varied << 1) | year_not_varied;
+                        SecondScreen(temp, window, btree, hmap, indep_vars, DS);
+                    }
+
+
+                }
 
                 // in any of the text rectangles
                 //listIndex = 0;
@@ -541,7 +565,6 @@ std::vector<string> Window::start(BongoTree& btree, BongoHashMap& hmap){
                     }
 
                     if(blanks > 0){}
-
                     else {
                         Ticket temp = Ticket(state_var,make_var,color_var,model_var,std::stoi(year));
                         unsigned char indep_vars = (state_not_varied << 4) | (make_not_varied << 3) | (model_not_varied << 2 ) | (color_not_varied << 1) | year_not_varied;
