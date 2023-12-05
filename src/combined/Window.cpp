@@ -45,15 +45,8 @@ void Window::printText(string txt, bool u, float x, float y, sf::RenderWindow *w
 }
 
 
-Window::Window() {
-
-}
-
-std::vector<string> Window::start(BongoTree& btree, BongoHashMap& hmap){
-    bool DS = pickScreen();
-    //true for tree
-    //false for hashmap
-    std::vector<std::pair<State, std::string>> statesList = {
+Window::Window()  {
+    statesList = {
     {NOWHERE, ""}, {AL, "Alabama"}, {AK, "Alaska"}, {AZ, "Arizona"}, {AR, "Arkansas"}, {CA, "California"}, {CO, "Colorado"}, {CT, "Connecticut"}, {DE, "Delaware"},
     {FL, "Florida"}, {GA, "Georgia"}, {HI, "Hawaii"}, {ID, "Idaho"}, {IL, "Illinois"}, {IN, "Indiana"}, {IA, "Iowa"}, {KS, "Kansas"}, {KY, "Kentucky"},
     {LA, "Louisiana"}, {ME, "Maine"}, {MD, "Maryland"}, {MA, "Massachusetts"}, {MI, "Michigan"}, {MN, "Minnesota"}, {MS, "Mississippi"}, {MO, "Missouri"},
@@ -63,8 +56,7 @@ std::vector<string> Window::start(BongoTree& btree, BongoHashMap& hmap){
     {WV, "West Virginia"}, {WI, "Wisconsin"}, {WY, "Wyoming"}
     };
 
-
-    std::vector<std::pair<Make,std::string>> makesList = {
+    makesList = {
         {ACURA,"Acura"}, {ALPINA,"Alpina"}, {ALFAROM,"Alfa Romero"}, {AUDI,"Audi"}, {BENZ,"Mercedes-Benz"}, {BMW,"BMW"}, {BUICK,"BUICK"}, {CHEVY,"Chevrolet"}, {FORD,"Ford"}, {GMC,"GMC"},
         {HONDA,"Honda"}, {HYUND,"Hyundai"}, {NISSAN,"Nissan"}, {RAM,"RAM"}, {SUBARU,"Subaru"}, {TESLA,"Tesla"}, {TOYOTA,"Toyota"}, {VOLKS,"Volkswagon"}, {CHRYS,"Chrystler"}, {DODGE,"Dodge"},
         {FIAT,"Fiat"}, {GM,"General Motors"}, {ISUZU,"Isuzu"}, {CADDIE,"Cadilac"}, {INTERNATL,"International"}, {JAG,"JAGUAR"}, {KWORTH,"Kenworth"}, {LAMBO,"Lambourghini"}, {LEXUS,"Lexus"}, {LINCOLN,"Lincoln"},
@@ -72,7 +64,7 @@ std::vector<string> Window::start(BongoTree& btree, BongoHashMap& hmap){
         {SUZUKU,"Suzuku"}, {UD,"UD"}, {VOLVO,"Volvo"}, {WORKHORS,"Workhorse"}, {JEEP,"Jeep"}, {KIA,"Kia"}, {MAZDA,"Mazda"}, {VEHICLE,""}
     };
 
-    std::vector<std::pair<Model,std::string>> modelsList = {
+    modelsList = {
         {MOTORCYCLE,"Motorcycle"},
         {SPORT,"Sports Car"},
         {SUBN,"Suburban"},
@@ -98,7 +90,7 @@ std::vector<string> Window::start(BongoTree& btree, BongoHashMap& hmap){
         {DIM3,"Three Dimensional Object"},
     };
 
-    std::vector<std::pair<Color,std::string>> colorsList = {
+    colorsList = {
         {RED,"Red"},
         {ORANGE,"Orange"},
         {YELLOW,"Yellow"},
@@ -118,6 +110,13 @@ std::vector<string> Window::start(BongoTree& btree, BongoHashMap& hmap){
         {SILVER,"Silver"},
         {TAN,"Tan"},
     };
+}
+
+std::vector<string> Window::start(BongoTree& btree, BongoHashMap& hmap){
+    bool DS = pickScreen();
+    //true for tree
+    //false for hashmap
+
 
     int curr = 0;
     int listIndex = 0;
@@ -695,7 +694,7 @@ std::vector<string> Window::start(BongoTree& btree, BongoHashMap& hmap){
 
 void Window::SecondScreen(Ticket input_match, sf::RenderWindow& window, BongoTree& btree, BongoHashMap& hmap, unsigned char indep_vars, bool tree_or_map) {
     vector<vector<string>> data;
-    data = {{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"}};
+    //data = {{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"}};
     int curr = 0;
     std::pair<float,std::vector<Ticket*>> result;
     if(tree_or_map) {
@@ -703,6 +702,37 @@ void Window::SecondScreen(Ticket input_match, sf::RenderWindow& window, BongoTre
     } else {
         result = hmap.getStats(input_match, indep_vars);
     }
+    // load data
+    for (auto item : result.second){
+        vector<string> temp;
+        for (auto p : statesList) {
+            if (p.first == item->_state) {
+                temp.push_back(p.second);
+                break;
+            }
+        }
+        for (auto p : makesList) {
+            if (p.first == item->_make) {
+                temp.push_back(p.second);
+                break;
+            }
+        }
+        for (auto p : modelsList) {
+            if (p.first == item->_model){
+              temp.push_back(p.second);
+              break;
+            }
+        }
+        for (auto p : colorsList) {
+            if (p.first == item->_color) {
+                temp.push_back(p.second);
+                break;
+            }
+        }
+        temp.push_back(to_string(item->_year));
+        data.push_back(temp);
+    }
+
     string prob = to_string(result.first);
     int scrollVal = 0;
     sf::RectangleShape Box;//= sf::Rect(400, 350, 100, 50);

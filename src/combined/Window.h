@@ -14,6 +14,10 @@ using namespace std;
 
 class Window {
     string name;
+    std::vector<std::pair<State, std::string>> statesList;
+    std::vector<std::pair<Make,std::string>> makesList;
+    std::vector<std::pair<Model,std::string>> modelsList;
+    std::vector<std::pair<Color,std::string>> colorsList;
 
 public:
     Window();

@@ -139,12 +139,12 @@ std::pair<float,std::vector<Ticket*>> BongoTree::query(Ticket input_match, unsig
       denominator_set = intersect(denominator_set, _years[input_match._year]);
     }
 
-    auto it = numerator_set.begin();
+    auto it = denominator_set.begin();
     std::vector<Ticket*> result_vec;
     for (int i = 0; i < 8; i++) {
       result_vec.push_back(*it);
       ++it;
-      if (it == numerator_set.end()) break;
+      if (it == denominator_set.end()) break;
     }
 
     return make_pair(((float) numerator_set.size() / (float) denominator_set.size()), result_vec);
