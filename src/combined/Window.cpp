@@ -44,10 +44,9 @@ void Window::printText(string txt, bool u, float x, float y, sf::RenderWindow *w
     window->draw(text);
 }
 
-
-Window::Window()  {
+Window::Window() {
     statesList = {
-    {NOWHERE, ""}, {AL, "Alabama"}, {AK, "Alaska"}, {AZ, "Arizona"}, {AR, "Arkansas"}, {CA, "California"}, {CO, "Colorado"}, {CT, "Connecticut"}, {DE, "Delaware"},
+    {AL, "Alabama"}, {AK, "Alaska"}, {AZ, "Arizona"}, {AR, "Arkansas"}, {CA, "California"}, {CO, "Colorado"}, {CT, "Connecticut"}, {DE, "Delaware"},
     {FL, "Florida"}, {GA, "Georgia"}, {HI, "Hawaii"}, {ID, "Idaho"}, {IL, "Illinois"}, {IN, "Indiana"}, {IA, "Iowa"}, {KS, "Kansas"}, {KY, "Kentucky"},
     {LA, "Louisiana"}, {ME, "Maine"}, {MD, "Maryland"}, {MA, "Massachusetts"}, {MI, "Michigan"}, {MN, "Minnesota"}, {MS, "Mississippi"}, {MO, "Missouri"},
     {MT, "Montana"}, {NE, "Nebraska"}, {NV, "Nevada"}, {NH, "New Hampshire"}, {NJ, "New Jersey"}, {NM, "New Mexico"}, {NY, "New York"},
@@ -61,7 +60,7 @@ Window::Window()  {
         {HONDA,"Honda"}, {HYUND,"Hyundai"}, {NISSAN,"Nissan"}, {RAM,"RAM"}, {SUBARU,"Subaru"}, {TESLA,"Tesla"}, {TOYOTA,"Toyota"}, {VOLKS,"Volkswagon"}, {CHRYS,"Chrystler"}, {DODGE,"Dodge"},
         {FIAT,"Fiat"}, {GM,"General Motors"}, {ISUZU,"Isuzu"}, {CADDIE,"Cadilac"}, {INTERNATL,"International"}, {JAG,"JAGUAR"}, {KWORTH,"Kenworth"}, {LAMBO,"Lambourghini"}, {LEXUS,"Lexus"}, {LINCOLN,"Lincoln"},
         {ROVER,"Rover"}, {MACK,"Mack"}, {MASR,"Maserati"}, {MERC,"Mercury"}, {MINI,"Mini"}, {MITSU,"Mitsubishi"}, {PORSCE,"Porsce"}, {PONTIAC,"Pontiac"}, {SATURN,"Saturn"}, {SMART,"Smart"},
-        {SUZUKU,"Suzuku"}, {UD,"UD"}, {VOLVO,"Volvo"}, {WORKHORS,"Workhorse"}, {JEEP,"Jeep"}, {KIA,"Kia"}, {MAZDA,"Mazda"}, {VEHICLE,""}
+        {SUZUKU,"Suzuku"}, {UD,"UD"}, {VOLVO,"Volvo"}, {WORKHORS,"Workhorse"}, {JEEP,"Jeep"}, {KIA,"Kia"}, {MAZDA,"Mazda"}
     };
 
     modelsList = {
@@ -87,7 +86,6 @@ Window::Window()  {
         {FWD,"Four-Wheel Drive"},
         {TWD,"Two-Wheel Drive"},
         {CONV,"Convertable"},
-        {DIM3,"Three Dimensional Object"},
     };
 
     colorsList = {
@@ -99,7 +97,6 @@ Window::Window()  {
         {PURPLE,"Purple"},
         {BLACK,"Black"},
         {GREY,"Grey"},
-        {UNKNOWN,""},
         {BROWN,"Brown"},
         {GOLD,"Gold"},
         {WHITE,"White"},
@@ -691,7 +688,6 @@ std::vector<string> Window::start(BongoTree& btree, BongoHashMap& hmap){
     return infoVec;
 }
 
-
 void Window::SecondScreen(Ticket input_match, sf::RenderWindow& window, BongoTree& btree, BongoHashMap& hmap, unsigned char indep_vars, bool tree_or_map) {
     vector<vector<string>> data;
     //data = {{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"},{"florida", "toyota", "four door", "blue", "2007"}};
@@ -898,6 +894,3 @@ bool Window::pickScreen() {
     }
     return true;
 };
-
-
-
