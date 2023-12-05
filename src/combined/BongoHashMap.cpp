@@ -112,7 +112,7 @@ vector<Ticket*> BongoHashMap::getAllCases(Ticket input_ticket, unsigned char ind
 
 pair<float, vector<Ticket*>> BongoHashMap::getStats(Ticket input_ticket, unsigned char indep_vars) {
     vector<Ticket*> other = getAllCases(input_ticket, indep_vars);
-    vector<Ticket*> other_top = vector(other.begin(), other.begin() + 8);
+    vector<Ticket*> other_top = vector<Ticket*>(other.begin(), other.begin() + 8);
     return make_pair((float) getCase(input_ticket).size() / (float) other.size(), other_top);
 };
 
